@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    namespace 'hu.bme.aut.android.devicemanager'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "hu.bme.aut.android.devicemanager"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+
+    // RainbowCake
+    def rainbow_cake_version = '1.6.0'
+    implementation "co.zsmb:rainbow-cake-core:$rainbow_cake_version"
+    implementation "co.zsmb:rainbow-cake-hilt:$rainbow_cake_version"
+    implementation "co.zsmb:rainbow-cake-navigation:$rainbow_cake_version"
+    implementation "co.zsmb:rainbow-cake-timber:$rainbow_cake_version"
+
+    // Hilt
+    def dagger_version = '2.44'
+    implementation "com.google.dagger:hilt-android:$dagger_version"
+    kapt "com.google.dagger:hilt-android-compiler:$dagger_version"
+
+    //Navigation
+    def nav_version = "2.5.2"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
+}
+
