@@ -10,8 +10,8 @@
 
     <color name="main_orange">#E15C34</color>
     <color name="dark_orange">#DD3B2C</color>
-    <color name="light_orange">#DD7A5C</color>
-    <color name="background_orange">#ECB298</color>
+    <color name="light_orange">#DA8166</color>
+    <color name="background_orange">#CCECB298</color>
     <color name="main_variant_orange">#F45547</color>
     <color name="dark_variant_orange">#EA2424</color>
 </resources>

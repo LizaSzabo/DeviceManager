@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,14 +31,39 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         setupLoginButton()
+        setupToggleButton()
     }
 
     private fun setupLoginButton() {
 
     }
 
+    private fun setupToggleButton(){
+        binding.switchLoginRoleButton.setOnClickListener{
+            if (!binding.switchLoginRoleButton.isChecked) {
+                viewModel.switchToUserMode()
+            } else {
+                viewModel.switchToAdminMode()
+            }
+        }
+    }
+
     override fun render(viewState: LoginViewState) {
-       //TODO
+        when (viewState) {
+            is InitialUser -> {
+                binding.textViewAdmin.isVisible = false
+                binding.registrationLink.isVisible = true
+            }
+            is InitialAdmin -> {
+                binding.textViewAdmin.isVisible = true
+                binding.registrationLink.isVisible = false
+            }
+            is Loading -> {
+
+            }
+            is LoginSuccess -> {}
+            is LoginFail -> {}
+        }
     }
 
 }

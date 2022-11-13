@@ -7,5 +7,7 @@
     <string name="user_name_text">User Name:</string>
     <string name="password_text">Password:</string>
     <string name="register_your_account_text">Register here</string>
-    <string name="admin_button_text">Switch to admin</string>
+    <string name="admin_login_button_text">Switch to admin</string>
+    <string name="user_login_button_text">switch to user</string>
+    <string name="as_admin_login_text">as Admin</string>
 </resources>
