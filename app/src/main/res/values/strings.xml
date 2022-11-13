@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">DeviceManager</string>
     <string name="login_button_text">Login</string>
+    <string name="login_text">Login</string>
+    <string name="to_text">to</string>
+    <string name="device_manager_text">DeviceManager</string>
+    <string name="user_name_text">User Name:</string>
+    <string name="password_text">Password:</string>
+    <string name="register_your_account_text">Register here</string>
+    <string name="admin_button_text">Switch to admin</string>
 </resources>
