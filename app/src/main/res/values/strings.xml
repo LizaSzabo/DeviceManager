@@ -10,4 +10,7 @@
     <string name="admin_login_button_text">Switch to admin</string>
     <string name="user_login_button_text">switch to user</string>
     <string name="as_admin_login_text">as Admin</string>
+    <string name="register_title">Register</string>
+    <string name="email_address_label_text">Email:</string>
+    <string name="password_again_text">Repeat password:</string>
 </resources>

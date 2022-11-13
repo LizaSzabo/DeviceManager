@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
-import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentLoginBinding
 
 @AndroidEntryPoint
@@ -16,7 +16,6 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
     private lateinit var binding: FragmentLoginBinding
     override fun provideViewModel() = getViewModelFromFactory()
-    override fun getViewResource() = R.layout.fragment_login
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +34,13 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
     }
 
     private fun setupLoginButton() {
-
+        binding.loginButton.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+        }
     }
 
-    private fun setupToggleButton(){
-        binding.switchLoginRoleButton.setOnClickListener{
+    private fun setupToggleButton() {
+        binding.switchLoginRoleButton.setOnClickListener {
             if (!binding.switchLoginRoleButton.isChecked) {
                 viewModel.switchToUserMode()
             } else {
@@ -65,5 +66,6 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             is LoginFail -> {}
         }
     }
+
 
 }
