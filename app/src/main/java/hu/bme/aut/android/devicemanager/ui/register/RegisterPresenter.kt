@@ -1,4 +1,4 @@
-package hu.bme.aut.android.devicemanager.register
+package hu.bme.aut.android.devicemanager.ui.register
 
 import javax.inject.Inject
 

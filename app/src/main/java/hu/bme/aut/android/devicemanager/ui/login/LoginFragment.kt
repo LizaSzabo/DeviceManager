@@ -1,4 +1,4 @@
-package hu.bme.aut.android.devicemanager.login
+package hu.bme.aut.android.devicemanager.ui.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,7 +35,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+           // findNavController().navigate(hu.bme.aut.android.devicemanager.login.LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 

@@ -1,4 +1,4 @@
-package hu.bme.aut.android.devicemanager.login
+package hu.bme.aut.android.devicemanager.ui.login
 
 import javax.inject.Inject
 

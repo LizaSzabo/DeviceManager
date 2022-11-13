@@ -1,4 +1,4 @@
-package hu.bme.aut.android.devicemanager.register
+package hu.bme.aut.android.devicemanager.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
