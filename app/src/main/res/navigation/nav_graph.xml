@@ -44,5 +44,12 @@
         <action
             android:id="@+id/action_startMenuFragment_to_devicesListFragment"
             app:destination="@id/devicesListFragment" />
+        <action
+            android:id="@+id/action_startMenuFragment_to_requestsListFragment"
+            app:destination="@id/requestsListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/requestsListFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.list.RequestsListFragment"
+        android:label="RequestsListFragment" />
 </navigation>

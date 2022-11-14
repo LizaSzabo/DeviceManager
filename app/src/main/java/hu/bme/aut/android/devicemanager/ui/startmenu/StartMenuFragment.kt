@@ -39,5 +39,8 @@ class StartMenuFragment : RainbowCakeFragment<StartMenuViewState, StartMenuViewM
         binding.buttonDeviceList.setOnClickListener {
             findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToDevicesListFragment())
         }
+        binding.buttonRentalRequestsList.setOnClickListener {
+            findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToRequestsListFragment())
+        }
     }
 }

@@ -8,6 +8,7 @@ import co.zsmb.requirektx.bundle.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import hu.bme.aut.android.devicemanager.domain.model.Device
 import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
+import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
 import hu.bme.aut.android.devicemanager.util.UserRole
 import timber.log.Timber
 
@@ -20,6 +21,11 @@ class DeviceManagerApp : Application() {
             Device(id = 1, name = "device1"),
             Device(id = 2, name = "device2", state = DeviceRentalState.Rented),
             Device(id = 3, name = "device3")
+        )
+        val mockRentalRequestData = listOf(
+            RentalRequest(1, Device(id = 1, name = "device1")),
+            RentalRequest(2, Device(id = 1, name = "device2")),
+            RentalRequest(3, Device(id = 1, name = "device1"))
         )
         var userRole = UserRole.User
     }
