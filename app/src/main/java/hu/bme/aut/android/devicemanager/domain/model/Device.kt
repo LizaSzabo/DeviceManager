@@ -5,5 +5,5 @@ import android.graphics.Bitmap
 data class Device(
     val id: Long? = null,
     val name: String,
-    val qrCode: Bitmap,
+    val qrCode: Bitmap? = null,
 )

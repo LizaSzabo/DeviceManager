@@ -31,11 +31,12 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
         setupLoginButton()
         setupToggleButton()
+        setupRegisterLink()
     }
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
         }
     }
 
@@ -46,6 +47,12 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             } else {
                 viewModel.switchToAdminMode()
             }
+        }
+    }
+
+    private fun setupRegisterLink(){
+        binding.registrationLink.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 

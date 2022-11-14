@@ -10,6 +10,7 @@ import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
+import hu.bme.aut.android.devicemanager.domain.model.Device
 
 @AndroidEntryPoint
 class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>() {
@@ -43,5 +44,12 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         devicesListAdapter = DevicesListAdapter()
         binding.rvDevices.layoutManager = LinearLayoutManager(context)
         binding.rvDevices.adapter = devicesListAdapter
+        devicesListAdapter.addAllDevices(
+            listOf(
+                Device(name = "device1"),
+                Device(name = "device2"),
+                Device(name = "device3")
+            )
+        )
     }
 }

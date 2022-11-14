@@ -3,6 +3,7 @@ package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
 
     inner class DeviceViewHolder(binding: ItemDeviceBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val tvDeviceName: TextView = binding.deviceName
 
         var device: Device? = null
     }
@@ -28,10 +30,18 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
     override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
         val device = devices[position]
 
+        holder.device = device
+        holder.tvDeviceName.text = device.name
     }
 
     override fun getItemCount(): Int {
         return devices.size
+    }
+
+    fun addAllDevices(device: List<Device>) {
+        devices -= devices
+        devices += device
+        submitList(devices)
     }
 
     companion object {
