@@ -15,7 +15,13 @@ import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
 class RequestListAdapter :
     ListAdapter<RentalRequest, RequestListAdapter.RequestListViewHolder>(ItemCallBack) {
 
-    var rentalRequests = emptyList<RentalRequest>()
+    private var rentalRequests = emptyList<RentalRequest>()
+
+    var itemClickListener: RequestItemClickListener? = null
+
+    interface RequestItemClickListener {
+        fun onItemClick(rentalRequest: RentalRequest)
+    }
 
     inner class RequestListViewHolder(binding: ItemRentalRequestBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -23,6 +29,12 @@ class RequestListAdapter :
         val itemCard: CardView = binding.cardView
 
         var rentalRequest: RentalRequest? = null
+
+        init {
+            itemView.setOnClickListener {
+                rentalRequest?.let { itemClickListener?.onItemClick(it) }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RequestListViewHolder(

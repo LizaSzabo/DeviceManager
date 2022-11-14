@@ -4,9 +4,8 @@ import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
 @HiltViewModel
 class RequestsListViewModel @Inject constructor(
-    private val requestsListPresenter: RequestStatePresenter
+    private val requestsListPresenter: RequestsListPresenter
 ) : RainbowCakeViewModel<RequestsListViewState>(Initial) {
 }

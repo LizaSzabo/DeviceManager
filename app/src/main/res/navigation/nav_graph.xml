@@ -51,5 +51,13 @@
     <fragment
         android:id="@+id/requestsListFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.list.RequestsListFragment"
-        android:label="RequestsListFragment" />
+        android:label="RequestsListFragment" >
+        <action
+            android:id="@+id/action_requestsListFragment_to_rentalRequestDetailsFragment"
+            app:destination="@id/rentalRequestDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rentalRequestDetailsFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.details.RentalRequestDetailsFragment"
+        android:label="RentalRequestDetailsFragment" />
 </navigation>

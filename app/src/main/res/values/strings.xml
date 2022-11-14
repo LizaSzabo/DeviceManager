@@ -22,4 +22,5 @@
     <string name="start_menu_device_list_button_text">Device List</string>
     <string name="start_button_rental_requests_list_button_text">Rental Requests List</string>
     <string name="start_menu_register_admin_user_button_text">Register Admin User</string>
+    <string name="rental_request_accept_button_text">Accept</string>
 </resources>
