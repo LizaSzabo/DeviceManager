@@ -10,12 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginVertical="4dp"
-        app:cardBackgroundColor="@color/background_orange"
-        app:cardCornerRadius="16dp"
+        android:background="@drawable/card_view_background_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/main_variant_orange"
-        app:strokeWidth="2dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"

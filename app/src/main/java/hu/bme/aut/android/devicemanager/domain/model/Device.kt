@@ -6,4 +6,9 @@ data class Device(
     val id: Long? = null,
     val name: String,
     val qrCode: Bitmap? = null,
+    val state: DeviceRentalState? = DeviceRentalState.Available
 )
+
+enum class DeviceRentalState {
+    Rented, Available
+}

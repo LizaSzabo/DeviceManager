@@ -1,7 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
 
 @AndroidEntryPoint
 class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>(),
@@ -51,14 +51,13 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         devicesListAdapter.addAllDevices(
             listOf(
                 Device(name = "device1"),
-                Device(name = "device2"),
+                Device(name = "device2", state = DeviceRentalState.Rented),
                 Device(name = "device3")
             )
         )
     }
 
     override fun onItemClick(device: Device) {
-        Log.i("deviceeee", device.name)
         findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToDeviceDetailsFragment())
     }
 }
