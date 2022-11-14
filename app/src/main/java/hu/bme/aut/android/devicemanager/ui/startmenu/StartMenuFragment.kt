@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,19 @@ class StartMenuFragment : RainbowCakeFragment<StartMenuViewState, StartMenuViewM
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupButtons()
+    }
+
     override fun render(viewState: StartMenuViewState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setupButtons() {
+        binding.buttonDeviceList.setOnClickListener {
+            findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToDevicesListFragment())
+        }
     }
 }

@@ -42,6 +42,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
                 userRole = UserRole.Admin
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
             } else {
+                userRole = UserRole.User
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
             }
         }
