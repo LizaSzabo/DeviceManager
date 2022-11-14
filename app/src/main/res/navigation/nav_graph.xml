@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_devicesListFragment"
             app:destination="@id/devicesListFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_startMenuFragment"
+            app:destination="@id/startMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -33,5 +36,13 @@
         <argument
             android:name="deviceID"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/startMenuFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.startmenu.StartMenuFragment"
+        android:label="StartMenuFragment" >
+        <action
+            android:id="@+id/action_startMenuFragment_to_devicesListFragment"
+            app:destination="@id/devicesListFragment" />
     </fragment>
 </navigation>
