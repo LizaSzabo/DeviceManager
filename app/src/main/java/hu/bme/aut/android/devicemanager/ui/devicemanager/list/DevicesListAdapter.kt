@@ -11,13 +11,25 @@ import hu.bme.aut.android.devicemanager.databinding.ItemDeviceBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
 
 class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHolder>(ItemCallBack) {
+
     var devices = emptyList<Device>()
+    var itemClickListener: DeviceItemClickListener? = null
+
+    interface DeviceItemClickListener {
+        fun onItemClick(device: Device)
+    }
 
     inner class DeviceViewHolder(binding: ItemDeviceBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val tvDeviceName: TextView = binding.deviceName
 
         var device: Device? = null
+
+        init {
+            itemView.setOnClickListener {
+                device?.let { itemClickListener?.onItemClick(it) }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DeviceViewHolder(

@@ -1,9 +1,11 @@
 package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -13,7 +15,8 @@ import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
 
 @AndroidEntryPoint
-class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>() {
+class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>(),
+    DevicesListAdapter.DeviceItemClickListener {
 
     private lateinit var binding: FragmentDevicesListBinding
     override fun provideViewModel() = getViewModelFromFactory()
@@ -43,6 +46,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
     private fun setupRecyclerView() {
         devicesListAdapter = DevicesListAdapter()
         binding.rvDevices.layoutManager = LinearLayoutManager(context)
+        devicesListAdapter.itemClickListener = this
         binding.rvDevices.adapter = devicesListAdapter
         devicesListAdapter.addAllDevices(
             listOf(
@@ -51,5 +55,10 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
                 Device(name = "device3")
             )
         )
+    }
+
+    override fun onItemClick(device: Device) {
+        Log.i("deviceeee", device.name)
+        findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToDeviceDetailsFragment())
     }
 }
