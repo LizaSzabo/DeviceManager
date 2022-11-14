@@ -35,7 +35,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
-           // findNavController().navigate(hu.bme.aut.android.devicemanager.login.LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
     }
 

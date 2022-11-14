@@ -1,4 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
-class DevicesListPresenter {
+import javax.inject.Inject
+
+class DevicesListPresenter @Inject constructor() {
 }
