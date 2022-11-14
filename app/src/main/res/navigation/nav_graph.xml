@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/devicesListFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.list.DevicesListFragment"
-        android:label="DevicesListFragment" >
+        android:label="DevicesListFragment">
         <action
             android:id="@+id/action_devicesListFragment_to_deviceDetailsFragment"
             app:destination="@id/deviceDetailsFragment" />
@@ -29,5 +29,9 @@
     <fragment
         android:id="@+id/deviceDetailsFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.details.DeviceDetailsFragment"
-        android:label="DeviceDetailsFragment" />
+        android:label="DeviceDetailsFragment">
+        <argument
+            android:name="deviceID"
+            app:argType="long" />
+    </fragment>
 </navigation>

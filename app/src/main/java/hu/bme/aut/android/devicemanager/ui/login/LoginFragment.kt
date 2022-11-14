@@ -9,7 +9,9 @@ import androidx.navigation.fragment.findNavController
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
 import hu.bme.aut.android.devicemanager.databinding.FragmentLoginBinding
+import hu.bme.aut.android.devicemanager.util.UserRole
 
 @AndroidEntryPoint
 class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
@@ -36,7 +38,11 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
+            if (binding.switchLoginRoleButton.isChecked) {
+                userRole = UserRole.Admin
+            } else {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
+            }
         }
     }
 
@@ -50,7 +56,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         }
     }
 
-    private fun setupRegisterLink(){
+    private fun setupRegisterLink() {
         binding.registrationLink.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }

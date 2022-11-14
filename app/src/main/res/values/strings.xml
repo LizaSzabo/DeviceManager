@@ -13,4 +13,10 @@
     <string name="register_title">Register</string>
     <string name="email_address_label_text">Email:</string>
     <string name="password_again_text">Repeat password:</string>
+    <string name="device_name_label_text">Name:</string>
+    <string name="device_state_label_text">Current state:</string>
+    <string name="device_first_available_label_text">First Available on:</string>
+    <string name="rent_device_button_text">Rent</string>
+    <string name="delete_device_button_text">Delete</string>
+    <string name="edit_device_button_text">Edit</string>
 </resources>

@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
-import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
 
 @AndroidEntryPoint
 class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>(),
@@ -49,15 +49,17 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         devicesListAdapter.itemClickListener = this
         binding.rvDevices.adapter = devicesListAdapter
         devicesListAdapter.addAllDevices(
-            listOf(
-                Device(name = "device1"),
-                Device(name = "device2", state = DeviceRentalState.Rented),
-                Device(name = "device3")
-            )
+            mockDeviceData
         )
     }
 
     override fun onItemClick(device: Device) {
-        findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToDeviceDetailsFragment())
+        device.id?.let {
+            findNavController().navigate(
+                DevicesListFragmentDirections.actionDevicesListFragmentToDeviceDetailsFragment(
+                    it
+                )
+            )
+        }
     }
 }
