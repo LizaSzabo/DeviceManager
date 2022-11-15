@@ -3,14 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
     <Button
         android:id="@+id/buttonAccept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
         android:text="@string/rental_request_accept_button_text"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rentalInterval" />
@@ -32,7 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/deviceIdLabel"
         app:layout_constraintStart_toEndOf="@+id/requestIdLabel"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Request id" />
@@ -54,7 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/deviceIdLabel"
         app:layout_constraintStart_toEndOf="@+id/deviceIdLabel"
         app:layout_constraintTop_toBottomOf="@+id/requestIdLabel"
         tools:text="device id" />
@@ -76,7 +86,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/deviceNameLabel"
         app:layout_constraintStart_toEndOf="@+id/deviceNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/deviceId"
         tools:text="device name" />
@@ -98,7 +111,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/userNameLabel"
         app:layout_constraintStart_toEndOf="@+id/userNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/deviceName"
         tools:text="User Name" />
@@ -120,7 +136,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="28dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rentalIntervalLabel"
         tools:text="2022.10.22. - 2022.11.23." />
@@ -131,8 +149,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
         android:text="@string/rental_request_status_label_text"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameLabel" />
 
@@ -142,7 +160,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="22sp"
+        android:textColor="@color/dark_orange_text"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/rentalRequestStatusLabel"
         app:layout_constraintStart_toEndOf="@+id/rentalRequestStatusLabel"
         app:layout_constraintTop_toBottomOf="@+id/userName"
         tools:text="Status" />
