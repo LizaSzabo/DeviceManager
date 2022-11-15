@@ -20,6 +20,5 @@ class DeviceDetailsViewModel @Inject constructor(
         } else {
             DeviceDataLoadingFailure("No such device")
         }
-
     }
 }

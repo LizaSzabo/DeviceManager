@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,10 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="TextView"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/requestIdLabel"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Request id" />
 
     <TextView
         android:id="@+id/deviceIdLabel"
@@ -53,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/deviceIdLabel"
-        app:layout_constraintTop_toBottomOf="@+id/requestIdLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/requestIdLabel"
+        tools:text="device id" />
 
     <TextView
         android:id="@+id/deviceNameLabel"
@@ -75,10 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/deviceNameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/deviceId" />
+        app:layout_constraintTop_toBottomOf="@+id/deviceId"
+        tools:text="device name" />
 
     <TextView
         android:id="@+id/userNameLabel"
@@ -97,10 +98,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="22sp"
         app:layout_constraintStart_toEndOf="@+id/userNameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/deviceName" />
+        app:layout_constraintTop_toBottomOf="@+id/deviceName"
+        tools:text="User Name" />
 
     <TextView
         android:id="@+id/rentalIntervalLabel"
@@ -111,16 +112,38 @@
         android:text="@string/rental_requested_interval_label_text"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/rentalRequestStatusLabel" />
 
     <TextView
         android:id="@+id/rentalInterval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="28dp"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rentalIntervalLabel"
+        tools:text="2022.10.22. - 2022.11.23." />
+
+    <TextView
+        android:id="@+id/rentalRequestStatusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="22sp"
+        android:text="@string/rental_request_status_label_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLabel" />
+
+    <TextView
+        android:id="@+id/rentalRequestStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
         android:textSize="22sp"
-        app:layout_constraintStart_toEndOf="@+id/rentalIntervalLabel"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
+        app:layout_constraintStart_toEndOf="@+id/rentalRequestStatusLabel"
+        app:layout_constraintTop_toBottomOf="@+id/userName"
+        tools:text="Status" />
 </androidx.constraintlayout.widget.ConstraintLayout>

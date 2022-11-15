@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.ItemRentalRequestBinding
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
+import hu.bme.aut.android.devicemanager.domain.model.RentalRequestStatus
 
 class RequestListAdapter :
     ListAdapter<RentalRequest, RequestListAdapter.RequestListViewHolder>(ItemCallBack) {
@@ -49,7 +50,11 @@ class RequestListAdapter :
         holder.rentalRequest = rentalRequest
         holder.tvDeviceName.text = rentalRequest.device?.name
 
-        holder.itemCard.setBackgroundResource(R.drawable.card_view_background_light)
+        if (rentalRequest.status == RentalRequestStatus.Accepted) {
+            holder.itemCard.setBackgroundResource(R.drawable.card_view_background_dark)
+        } else {
+            holder.itemCard.setBackgroundResource(R.drawable.card_view_background_light)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -60,6 +65,7 @@ class RequestListAdapter :
         rentalRequests -= rentalRequests
         rentalRequests += rentalRequest
         submitList(rentalRequests)
+        notifyDataSetChanged()
     }
 
     companion object {

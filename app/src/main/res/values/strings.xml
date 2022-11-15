@@ -27,4 +27,5 @@
     <string name="device_id_label_text">Device id:</string>
     <string name="user_name_label_text">User name:</string>
     <string name="rental_requested_interval_label_text">Rental requested interval:</string>
+    <string name="rental_request_status_label_text">Rental Request status</string>
 </resources>

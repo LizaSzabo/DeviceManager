@@ -51,6 +51,12 @@ class RequestsListFragment : RainbowCakeFragment<RequestsListViewState, Requests
     }
 
     override fun onItemClick(rentalRequest: RentalRequest) {
-        findNavController().navigate(RequestsListFragmentDirections.actionRequestsListFragmentToRentalRequestDetailsFragment())
+        rentalRequest.id?.let {
+            findNavController().navigate(
+                RequestsListFragmentDirections.actionRequestsListFragmentToRentalRequestDetailsFragment(
+                    it
+                )
+            )
+        }
     }
 }
