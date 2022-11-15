@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -40,22 +41,28 @@ class RentalRequestDetailsFragment :
         when (viewState) {
             is Initial -> {
                 binding.buttonAccept.isEnabled = false
+                binding.loading.isVisible = false
             }
             is RentalRequestDataLoading -> {
                 binding.buttonAccept.isEnabled = false
+                binding.loading.isVisible = true
             }
             is RentalRequestDataReady -> {
+                binding.loading.isVisible = false
                 showRequestData(viewState.rentalRequest)
                 binding.buttonAccept.isEnabled = true
             }
             is RentalRequestAccepted -> {
+                binding.loading.isVisible = false
                 showRequestData(viewState.rentalRequest)
                 binding.buttonAccept.isEnabled = false
             }
             is RentalRequestLoadingFailure -> {
+                binding.loading.isVisible = false
                 binding.buttonAccept.isEnabled = false
             }
             is RentalRequestAcceptFailure -> {
+                binding.loading.isVisible = false
                 binding.buttonAccept.isEnabled = false
             }
         }

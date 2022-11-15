@@ -15,4 +15,5 @@
     <color name="main_variant_orange">#F45547</color>
     <color name="dark_variant_orange">#EA2424</color>
     <color name="dark_orange_text">#E44C10</color>
+    <color name="dark_orange_grey_text">#833B1D</color>
 </resources>
