@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_startMenuFragment_to_requestsListFragment"
             app:destination="@id/requestsListFragment" />
+        <action
+            android:id="@+id/action_startMenuFragment_to_createAdminFragment"
+            app:destination="@id/createAdminFragment" />
     </fragment>
     <fragment
         android:id="@+id/requestsListFragment"
@@ -64,4 +67,8 @@
             android:name="rentalRequestID"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/createAdminFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.createadmin.CreateAdminFragment"
+        android:label="CreateAdminFragment" />
 </navigation>

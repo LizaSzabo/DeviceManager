@@ -28,4 +28,6 @@
     <string name="user_name_label_text">User name:</string>
     <string name="rental_requested_interval_label_text">Rental requested interval:</string>
     <string name="rental_request_status_label_text">Rental Request status</string>
+    <string name="register_admin_title">Register administrator</string>
+    <string name="create_new_administrator_button_text">Register Administrator</string>
 </resources>

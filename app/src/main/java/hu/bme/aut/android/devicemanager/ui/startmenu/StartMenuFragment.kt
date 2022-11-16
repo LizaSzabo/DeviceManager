@@ -42,5 +42,8 @@ class StartMenuFragment : RainbowCakeFragment<StartMenuViewState, StartMenuViewM
         binding.buttonRentalRequestsList.setOnClickListener {
             findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToRequestsListFragment())
         }
+        binding.buttonRegisterAdmin.setOnClickListener {
+            findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToCreateAdminFragment())
+        }
     }
 }
