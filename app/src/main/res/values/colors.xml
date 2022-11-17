@@ -16,4 +16,6 @@
     <color name="dark_variant_orange">#EA2424</color>
     <color name="dark_orange_text">#E44C10</color>
     <color name="dark_orange_grey_text">#833B1D</color>
+    <color name="background_grey_light_orange">#CCC1B2AB</color>
+    <color name="background_grey_dark_orange">#CC91786D</color>
 </resources>

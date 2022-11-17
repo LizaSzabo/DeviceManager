@@ -50,10 +50,16 @@ class RequestListAdapter :
         holder.rentalRequest = rentalRequest
         holder.tvDeviceName.text = rentalRequest.device?.name
 
-        if (rentalRequest.status == RentalRequestStatus.Accepted) {
-            holder.itemCard.setBackgroundResource(R.drawable.card_view_background_dark)
-        } else {
-            holder.itemCard.setBackgroundResource(R.drawable.card_view_background_light)
+        when (rentalRequest.status) {
+            RentalRequestStatus.Accepted -> {
+                holder.itemCard.setBackgroundResource(R.drawable.card_view_background_dark)
+            }
+            RentalRequestStatus.Active -> {
+                holder.itemCard.setBackgroundResource(R.drawable.card_view_background_light)
+            }
+            else -> {
+                holder.itemCard.setBackgroundResource(R.drawable.card_view_grey_background)
+            }
         }
     }
 
