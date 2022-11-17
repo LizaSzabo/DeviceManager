@@ -66,9 +66,23 @@
         <argument
             android:name="rentalRequestID"
             app:argType="long" />
+        <action
+            android:id="@+id/action_rentalRequestDetailsFragment_to_takeBackFragment"
+            app:destination="@id/takeBackFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAdminFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.createadmin.CreateAdminFragment"
         android:label="CreateAdminFragment" />
+    <fragment
+        android:id="@+id/takeBackFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.takeback.TakeBackFragment"
+        android:label="TakeBackFragment">
+        <argument
+            android:name="rentalRequestID"
+            app:argType="long" />
+        <argument
+            android:name="deviceID"
+            app:argType="long" />
+    </fragment>
 </navigation>

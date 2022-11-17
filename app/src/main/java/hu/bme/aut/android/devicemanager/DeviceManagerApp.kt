@@ -15,15 +15,15 @@ import timber.log.Timber
 class DeviceManagerApp : Application() {
 
     companion object {
-        val mockDeviceData = listOf(
-            Device(id = 1, name = "device1"),
+        val mockDeviceData = mutableListOf(
+            Device(id = 1, name = "device1",  qrCode = "123456"),
             Device(id = 2, name = "device2", state = DeviceRentalState.Rented),
             Device(id = 3, name = "device3")
         )
         val mockRentalRequestData = mutableListOf(
             RentalRequest(
                 1,
-                Device(id = 1, name = "device1"),
+                Device(id = 1, name = "device1",  qrCode = "123456"),
                 User(1, "User Name", ""),
                 RentalRequestStatus.Active
             ),
@@ -35,7 +35,7 @@ class DeviceManagerApp : Application() {
             ),
             RentalRequest(
                 3,
-                Device(id = 1, name = "device1"),
+                Device(id = 1, name = "device1", qrCode = "123456"),
                 User(2, "User Name2", ""),
                 RentalRequestStatus.Accepted
             )

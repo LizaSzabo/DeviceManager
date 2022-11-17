@@ -8,5 +8,5 @@ data class RentalRequest(
 )
 
 enum class RentalRequestStatus {
-    Active, Accepted
+    Active, Accepted, Closed
 }

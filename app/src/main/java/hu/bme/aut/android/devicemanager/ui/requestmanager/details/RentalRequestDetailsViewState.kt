@@ -10,6 +10,8 @@ object RentalRequestDataLoading : RentalRequestDetailsViewState()
 
 class RentalRequestDataReady(val rentalRequest: RentalRequest) : RentalRequestDetailsViewState()
 
+class RentalRequestClosed(val rentalRequest: RentalRequest) : RentalRequestDetailsViewState()
+
 class RentalRequestLoadingFailure(val message: String) : RentalRequestDetailsViewState()
 
 class RentalRequestAcceptFailure(val message: String) : RentalRequestDetailsViewState()

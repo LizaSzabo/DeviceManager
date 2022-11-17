@@ -23,6 +23,8 @@ class RentalRequestDetailsViewModel @Inject constructor(
                 RentalRequestDataReady(rentalRequestData)
             } else if (rentalRequestData != null && rentalRequestData.status == RentalRequestStatus.Accepted) {
                 RentalRequestAccepted(rentalRequestData)
+            } else if (rentalRequestData != null && rentalRequestData.status == RentalRequestStatus.Closed) {
+                RentalRequestClosed(rentalRequestData)
             } else {
                 RentalRequestLoadingFailure("No such request")
             }
