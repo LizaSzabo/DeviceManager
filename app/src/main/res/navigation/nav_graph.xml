@@ -36,6 +36,9 @@
         <argument
             android:name="deviceID"
             app:argType="long" />
+        <action
+            android:id="@+id/action_deviceDetailsFragment_to_rentalRequestFragment"
+            app:destination="@id/rentalRequestFragment" />
     </fragment>
     <fragment
         android:id="@+id/startMenuFragment"
@@ -84,5 +87,17 @@
         <argument
             android:name="deviceID"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.calendar.CalendarFragment"
+        android:label="CalendarFragment" />
+    <fragment
+        android:id="@+id/rentalRequestFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.request.RentalRequestFragment"
+        android:label="RentalRequestFragment" >
+        <action
+            android:id="@+id/action_rentalRequestFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
 </navigation>

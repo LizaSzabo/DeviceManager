@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
@@ -38,6 +39,7 @@ class DeviceDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
 
         setupUserRole()
+        setupRentButton()
         viewModel.loadDeviceData(args.deviceID)
     }
 
@@ -78,6 +80,12 @@ class DeviceDetailsFragment :
         } else {
             binding.buttonEdit.isVisible = false
             binding.buttonDelete.isVisible = false
+        }
+    }
+
+    private fun setupRentButton() {
+        binding.buttonRent.setOnClickListener {
+            findNavController().navigate(DeviceDetailsFragmentDirections.actionDeviceDetailsFragmentToRentalRequestFragment())
         }
     }
 }
