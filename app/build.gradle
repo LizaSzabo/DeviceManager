@@ -74,6 +74,8 @@ dependencies {
 
     //MaterialCalendarView
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
 
 }
 

@@ -2,21 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingVertical="28dp"
-    android:paddingHorizontal="16dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="28dp">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.applandeo.materialcalendarview.CalendarView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background_grey_light_orange"
+        android:padding="16dp"
+        app:abbreviationsBarColor="@color/background_grey_light_orange"
+        app:abbreviationsLabelsColor="@color/dark_orange_text"
+        app:daysLabelsColor="@color/dark_orange_grey_text"
+        app:disabledDaysLabelsColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:mcv_dateTextAppearance="@style/CalendarWidgetDate"
-        app:mcv_headerTextAppearance="@style/CalendarWidgetHeader"
-        app:mcv_selectionColor="@color/light_orange"
-        android:background="@color/background_grey_light_orange"
         app:mcv_showOtherDates="all"
-        android:padding="16dp"
-        app:mcv_weekDayTextAppearance="@style/CalendarWidgetWeekDay" />
+        app:pagesColor="@color/background_grey_light_orange"
+        app:selectionColor="@color/main_variant_orange"
+        app:todayLabelColor="@color/dark_orange_grey_text"
+        app:type="range_picker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
