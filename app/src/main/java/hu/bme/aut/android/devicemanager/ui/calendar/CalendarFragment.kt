@@ -33,15 +33,15 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_NONE
+        binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_RANGE
 
-        val calendar: Calendar = Calendar.getInstance()
+     /*   val calendar: Calendar = Calendar.getInstance()
         calendar.set(2017, 11, 14)
 
         val calendar1: Calendar = Calendar.getInstance()
         calendar1.set(2017, 11, 16)
 
-        binding.calendarView.setDateSelected(CalendarDay.today(), true)
+        binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
 
     }
 
