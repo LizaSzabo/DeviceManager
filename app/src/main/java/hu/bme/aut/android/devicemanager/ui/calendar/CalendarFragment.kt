@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentCalendarBinding
+import java.util.*
 
 @AndroidEntryPoint
 class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewModel>() {
@@ -29,6 +32,16 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_NONE
+
+        val calendar: Calendar = Calendar.getInstance()
+        calendar.set(2017, 11, 14)
+
+        val calendar1: Calendar = Calendar.getInstance()
+        calendar1.set(2017, 11, 16)
+
+        binding.calendarView.setDateSelected(CalendarDay.today(), true)
 
     }
 
