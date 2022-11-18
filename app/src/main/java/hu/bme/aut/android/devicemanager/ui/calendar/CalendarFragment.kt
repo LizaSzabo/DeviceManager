@@ -1,13 +1,11 @@
 package hu.bme.aut.android.devicemanager.ui.calendar
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.view.size
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +30,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_RANGE
@@ -45,6 +44,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         calendar1.set(2022, 11, 16)
 
         binding.calendarView.setDisabledDays(listOf(calendar, calendar1))
+
         /* binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
 
 
@@ -59,6 +59,6 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         binding.calendarView.setHeaderColor(R.color.main_variant_orange)
         binding.calendarView.setHeaderLabelColor(R.color.white)
         binding.calendarView.setAllowClickWhenDisabled(false)
-
+        binding.calendarView.setCalendarDayLayout(R.layout.layout_calendar_day)
     }
 }
