@@ -91,11 +91,18 @@
     <fragment
         android:id="@+id/calendarFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.calendar.CalendarFragment"
-        android:label="CalendarFragment" />
+        android:label="CalendarFragment">
+        <argument
+            android:name="deviceID"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/rentalRequestFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.request.RentalRequestFragment"
-        android:label="RentalRequestFragment" >
+        android:label="RentalRequestFragment">
+        <argument
+            android:name="deviceID"
+            app:argType="long" />
         <action
             android:id="@+id/action_rentalRequestFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />

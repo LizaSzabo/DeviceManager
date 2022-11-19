@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,7 @@ class RentalRequestFragment :
     private lateinit var binding: FragmentRentalRequestBinding
     override fun provideViewModel() = getViewModelFromFactory()
     override fun getViewResource() = R.layout.fragment_rental_request
+    private val args: RentalRequestFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +48,11 @@ class RentalRequestFragment :
 
     private fun setupRentalIntervalTv() {
         binding.rentalInterval.setOnClickListener {
-            findNavController().navigate(RentalRequestFragmentDirections.actionRentalRequestFragmentToCalendarFragment())
+            findNavController().navigate(
+                RentalRequestFragmentDirections.actionRentalRequestFragmentToCalendarFragment(
+                    args.deviceID
+                )
+            )
         }
     }
 }

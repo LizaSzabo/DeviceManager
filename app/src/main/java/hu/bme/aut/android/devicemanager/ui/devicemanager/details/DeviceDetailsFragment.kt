@@ -85,7 +85,11 @@ class DeviceDetailsFragment :
 
     private fun setupRentButton() {
         binding.buttonRent.setOnClickListener {
-            findNavController().navigate(DeviceDetailsFragmentDirections.actionDeviceDetailsFragmentToRentalRequestFragment())
+            findNavController().navigate(
+                DeviceDetailsFragmentDirections.actionDeviceDetailsFragmentToRentalRequestFragment(
+                    args.deviceID
+                )
+            )
         }
     }
 }
