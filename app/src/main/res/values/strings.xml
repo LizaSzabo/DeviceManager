@@ -31,4 +31,5 @@
     <string name="register_admin_title">Register administrator</string>
     <string name="create_new_administrator_button_text">Register Administrator</string>
     <string name="take_back_button_text">Take back</string>
+    <string name="select_date_button_text">Select</string>
 </resources>

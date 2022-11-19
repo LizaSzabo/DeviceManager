@@ -8,4 +8,6 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
     private val calendarPresenter: CalendarPresenter
 ) : RainbowCakeViewModel<CalendarViewState>(Initial) {
+
+    fun setSelectedDateToRentalRequest() {}
 }

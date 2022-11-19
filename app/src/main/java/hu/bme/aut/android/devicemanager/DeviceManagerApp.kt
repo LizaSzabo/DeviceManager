@@ -7,10 +7,9 @@ import co.zsmb.rainbowcake.timber.TIMBER
 import co.zsmb.requirektx.bundle.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import hu.bme.aut.android.devicemanager.domain.model.*
-import hu.bme.aut.android.devicemanager.domain.model.Calendar
 import hu.bme.aut.android.devicemanager.util.UserRole
 import timber.log.Timber
-import java.util.*
+import java.time.LocalDate
 
 
 @HiltAndroidApp
@@ -18,9 +17,9 @@ class DeviceManagerApp : Application() {
 
     companion object {
         val activeRents = mutableListOf(
-            ActiveRent(3, Date(2022, 10, 1), Date(2022, 10, 4), 1),
-            ActiveRent(2, Date(2022, 10, 7), Date(2022, 10, 10), 1),
-            ActiveRent(1, Date(2022, 10, 15), Date(2022, 10, 16), 1),
+            ActiveRent(3, LocalDate.of(2022, 10, 1), LocalDate.of(2022, 10, 4), 1),
+            ActiveRent(2, LocalDate.of(2022, 10, 7), LocalDate.of(2022, 10, 10), 1),
+            ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 1),
         )
         val calendar = Calendar(1, 1, activeRents)
         val mockDeviceData = mutableListOf(

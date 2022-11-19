@@ -14,7 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentCalendarBinding
+import java.time.LocalDate
 import java.util.*
+
 
 @AndroidEntryPoint
 class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewModel>() {
@@ -52,15 +54,17 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
 
         if (activeRentOnDevice != null) {
             for (activeRent in activeRentOnDevice) {
-                val calendar: Calendar = Calendar.getInstance()
-                activeRent.startDate?.let {
-                    calendar.set(
-                        activeRent.startDate.year,
-                        activeRent.startDate.month,
-                        it.date
-                    )
+                if (activeRent.startDate != null && activeRent.endDate != null) {
+                    for (activeRentDate in activeRent.startDate..activeRent.endDate) {
+                        val calendar: Calendar = Calendar.getInstance()
+                        calendar.set(
+                            activeRentDate.year,
+                            activeRentDate.monthValue,
+                            activeRentDate.dayOfMonth
+                        )
+                        disableDates.add(calendar)
+                    }
                 }
-                disableDates.add(calendar)
             }
         }
         Log.i("activeRentOnDeviceDisabledDates", disableDates.size.toString())
@@ -68,7 +72,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
 
         /* binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
 
-
+        setupSelectButton()
     }
 
     override fun render(viewState: CalendarViewState) {
@@ -81,7 +85,32 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         binding.calendarView.setHeaderLabelColor(R.color.white)
         binding.calendarView.setAllowClickWhenDisabled(false)
         binding.calendarView.setCalendarDayLayout(R.layout.layout_calendar_day)
+    }
 
-        val selectedDates: List<Calendar> = binding.calendarView.selectedDates
+    private fun setupSelectButton() {
+        binding.selectDateButton.setOnClickListener {
+            val selectedDates: List<Calendar> = binding.calendarView.selectedDates
+            Log.i("selectedDates: ", selectedDates.size.toString())
+            viewModel.setSelectedDateToRentalRequest()
+        }
+    }
+
+    operator fun ClosedRange<LocalDate>.iterator(): Iterator<LocalDate> {
+        return object : Iterator<LocalDate> {
+            private var next = this@iterator.start
+            private val finalElement = this@iterator.endInclusive
+            private var hasNext = !next.isAfter(this@iterator.endInclusive)
+            override fun hasNext(): Boolean = hasNext
+            override fun next(): LocalDate {
+                val value = next
+                if (value == finalElement) {
+                    hasNext = false
+                } else {
+                    next = next.plusDays(1)
+                }
+                return value
+            }
+        }
+
     }
 }
