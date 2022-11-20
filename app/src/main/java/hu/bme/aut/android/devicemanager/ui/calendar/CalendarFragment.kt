@@ -90,8 +90,18 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
     private fun setupSelectButton() {
         binding.selectDateButton.setOnClickListener {
             val selectedDates: List<Calendar> = binding.calendarView.selectedDates
-            Log.i("selectedDates: ", selectedDates.size.toString())
-            viewModel.setSelectedDateToRentalRequest()
+            Log.i("selectedDates: ", selectedDates.toString())
+            val startDay = LocalDate.of(
+                binding.calendarView.firstSelectedDate.get(Calendar.YEAR),
+                binding.calendarView.firstSelectedDate.get(Calendar.MONTH) + 1,
+                binding.calendarView.firstSelectedDate.get(Calendar.DAY_OF_MONTH)
+            )
+            val endDay = LocalDate.of(
+                selectedDates.last().get(Calendar.YEAR),
+                selectedDates.last().get(Calendar.MONTH) + 1,
+                selectedDates.last().get(Calendar.DAY_OF_MONTH)
+            )
+            viewModel.setSelectedDateToRentalRequest(args.deviceID, startDay, endDay)
         }
     }
 

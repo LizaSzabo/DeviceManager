@@ -17,11 +17,11 @@ class DeviceManagerApp : Application() {
 
     companion object {
         val activeRents = mutableListOf(
-            ActiveRent(3, LocalDate.of(2022, 10, 1), LocalDate.of(2022, 10, 4), 1),
-            ActiveRent(2, LocalDate.of(2022, 10, 7), LocalDate.of(2022, 10, 10), 1),
-            ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 1),
+            ActiveRent(3, LocalDate.of(2022, 10, 1), LocalDate.of(2022, 10, 4), 2),
+            ActiveRent(2, LocalDate.of(2022, 10, 7), LocalDate.of(2022, 10, 10), 2),
+            ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 2),
         )
-        val calendar = Calendar(1, 1, activeRents)
+        var calendar = Calendar(1, 1, activeRents)
         val mockDeviceData = mutableListOf(
             Device(id = 1, name = "device1", qrCode = "123456", calendar = calendar),
             Device(id = 2, name = "device2", state = DeviceRentalState.Rented),
@@ -48,6 +48,7 @@ class DeviceManagerApp : Application() {
             )
         )
         var userRole = UserRole.User
+        var currentUser = User(1, "User Name", "123456")
     }
 
     override fun onCreate() {
