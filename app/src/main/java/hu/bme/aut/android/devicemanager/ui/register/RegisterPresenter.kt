@@ -1,12 +1,18 @@
 package hu.bme.aut.android.devicemanager.ui.register
 
-import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
-import hu.bme.aut.android.devicemanager.util.PresentationResult
+import hu.bme.aut.android.devicemanager.domain.interactors.AuthenticationInteractor
+import hu.bme.aut.android.devicemanager.util.PresentationResponse
+import hu.bme.aut.android.devicemanager.util.makeNetworkCall
 import javax.inject.Inject
 
-class RegisterPresenter @Inject constructor() {
+class RegisterPresenter @Inject constructor(
+    private val authenticationInteractor: AuthenticationInteractor
+) {
 
-    suspend fun createUser(userName: String, password: String): PresentationResult {
-        return PresentationNetworkError("Not yet implemented!!!")
-    }
+    suspend fun createUser(userName: String, password: String): PresentationResponse<Nothing> =
+        makeNetworkCall(
+            interactor = { authenticationInteractor.createUser(userName, password) },
+            converter = { it }
+        )
+
 }

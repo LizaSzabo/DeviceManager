@@ -20,9 +20,6 @@ class RegisterViewModel @Inject constructor(
                 is PresentationNoResult -> {
                     RegisterSuccess
                 }
-                is PresentationNetworkError -> {
-                    RegisterFail(createUserResponse.message)
-                }
                 else -> {
                     RegisterFail(Resources.getSystem().getString(R.string.unknown_error_text))
                 }
