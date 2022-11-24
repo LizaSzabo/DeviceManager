@@ -33,4 +33,6 @@
     <string name="take_back_button_text">Take back</string>
     <string name="select_date_button_text">Select</string>
     <string name="click_here_for_calendar_text">click here for Calendar</string>
+    <string name="unknown_error_text">Unknown error!</string>
+    <string name="create_user_success_message_text">User Creation Success</string>
 </resources>

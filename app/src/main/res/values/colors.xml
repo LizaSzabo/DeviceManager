@@ -18,4 +18,7 @@
     <color name="dark_orange_grey_text">#833B1D</color>
     <color name="background_grey_light_orange">#CCC1B2AB</color>
     <color name="background_grey_dark_orange">#CC91786D</color>
+
+    <color name="success_color">#108015</color>
+    <color name="error_color">#BF1445</color>
 </resources>
