@@ -84,10 +84,6 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
             binding.userNameInput.error = "User name cannot be empty!"
             error = true
         }
-        if (binding.userEmailInput.text.isEmpty()) {
-            binding.userEmailInput.error = "Password cannot be empty!"
-            error = true
-        }
         if (binding.passwordInput.text.isEmpty()) {
             binding.passwordInput.error = "Password cannot be empty!"
             error = true
