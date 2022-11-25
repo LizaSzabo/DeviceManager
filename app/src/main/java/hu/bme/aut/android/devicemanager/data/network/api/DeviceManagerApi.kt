@@ -1,10 +1,7 @@
 package hu.bme.aut.android.devicemanager.data.network.api
 
 import hu.bme.aut.android.devicemanager.data.network.model.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface DeviceManagerApi {
 
@@ -20,11 +17,17 @@ interface DeviceManagerApi {
 
 
     @GET("device")
-    suspend fun getDevices(@Header("Authorization") token: String): List<DeviceResponse>
+    suspend fun getDevices(@Header("Authorization") token: String): List<DeviceListElementResponse>
 
     @POST("device")
     suspend fun addDevice(
         @Header("Authorization") token: String,
         @Body addDeviceRequest: AddDeviceRequest
     )
+
+    @GET("device/{id}")
+    suspend fun getDevice(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): DeviceResponse
 }

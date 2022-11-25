@@ -4,7 +4,6 @@ import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.activeRents
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.calendar
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.currentUser
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
 import hu.bme.aut.android.devicemanager.domain.model.ActiveRent
@@ -31,13 +30,13 @@ class CalendarViewModel @Inject constructor(
         )
 
         //TODO: search calendar of device
-        calendar = calendar.copy(activeRents = activeRents)
+        //calendar = calendar.copy(activeRents = activeRents)
 
         val deviceData = mockDeviceData.first { it.id == deviceId }
         val index = mockDeviceData.indexOf(deviceData)
 
-        val modifiedDeviceData = deviceData.copy(calendar = calendar)
+       // val modifiedDeviceData = deviceData.copy(calendar = calendar)
 
-        mockDeviceData[index] = modifiedDeviceData
+        //mockDeviceData[index] = modifiedDeviceData
     }
 }

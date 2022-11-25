@@ -47,7 +47,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         calendar1.set(2022, 11, 16)
 
         val device = mockDeviceData.firstOrNull { it.id == args.deviceID }
-        val activeRentOnDevice = device?.calendar?.activeRents
+      /*  val activeRentOnDevice = device?.calendar?.activeRents
         val disableDates = mutableListOf<Calendar>()
 
         Log.i("activeRentOnDevice", activeRentOnDevice.toString())
@@ -68,7 +68,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
             }
         }
         Log.i("activeRentOnDeviceDisabledDates", disableDates.size.toString())
-        binding.calendarView.setDisabledDays(disableDates)
+        binding.calendarView.setDisabledDays(disableDates)*/
 
         /* binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
 

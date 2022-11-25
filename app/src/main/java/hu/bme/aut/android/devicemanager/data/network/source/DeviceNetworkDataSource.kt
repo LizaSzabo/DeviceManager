@@ -16,4 +16,8 @@ class DeviceNetworkDataSource(
         val addDeviceRequest = AddDeviceRequest(name = deviceName, state = "")
         deviceManagerApi.addDevice(token, addDeviceRequest)
     }
+
+    suspend fun getDevice(deviceId: String) = apiCall {
+        deviceManagerApi.getDevice(deviceId, token)
+    }
 }

@@ -21,7 +21,6 @@ class DeviceManagerApp : Application() {
             ActiveRent(2, LocalDate.of(2022, 10, 7), LocalDate.of(2022, 10, 10), 2),
             ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 2),
         )
-        var calendar = Calendar(1, 1, activeRents)
         val mockDeviceData = mutableListOf<Device>(
         )
         val mockRentalRequestData = mutableListOf<RentalRequest>()

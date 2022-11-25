@@ -2,6 +2,7 @@ package hu.bme.aut.android.devicemanager.domain.interactors
 
 import hu.bme.aut.android.devicemanager.data.network.source.DeviceNetworkDataSource
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
 import hu.bme.aut.android.devicemanager.util.*
 import javax.inject.Inject
 
@@ -34,6 +35,27 @@ class DeviceInteractor @Inject constructor(
             is NetworkResult -> {
                 NetworkResult("success")
             }
+        }
+    }
+
+    suspend fun getDevice(deviceId: String): NetworkResponse<Device> {
+        return when (val getDeviceResponse = deviceNetworkDataSource.getDevice(deviceId)) {
+            is NetworkError -> {
+                NetworkError(getDeviceResponse.errorMessage)
+            }
+            is NetworkResult -> {
+                val state: DeviceRentalState =
+                    if (getDeviceResponse.result.state == "AVAILABLE") DeviceRentalState.Available else DeviceRentalState.Rented
+                val device =
+                    Device(
+                        id = getDeviceResponse.result.id,
+                        name = getDeviceResponse.result.name,
+                        state = state,
+                        calendar = getDeviceResponse.result.calendar
+                    )
+                NetworkResult(device)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
         }
     }
 }

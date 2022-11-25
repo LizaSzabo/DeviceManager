@@ -56,6 +56,7 @@ class DeviceDetailsFragment :
             is DeviceDataReady -> {
                 binding.buttonRent.isEnabled = true
                 binding.loading.isVisible = false
+
                 showDeviceData(viewState.device)
             }
             is DeviceDataLoadingFailure -> {

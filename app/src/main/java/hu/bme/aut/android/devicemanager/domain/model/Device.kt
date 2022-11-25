@@ -5,7 +5,7 @@ data class Device(
     val name: String,
     val qrCode: String? = null, //nem kell
     val state: DeviceRentalState? = DeviceRentalState.Available,
-    val calendar: Calendar? = null,
+    val calendar: List<Calendar>? = null,
 )
 
 enum class DeviceRentalState {

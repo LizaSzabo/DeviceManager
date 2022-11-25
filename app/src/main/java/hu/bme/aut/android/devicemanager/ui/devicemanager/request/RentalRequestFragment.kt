@@ -72,6 +72,7 @@ class RentalRequestFragment :
 
     @SuppressLint("SetTextI18n")
     private fun setupData(device: Device) {
+        /*
         val startDate =  device.calendar?.activeRents?.firstOrNull{ it.userId == currentUser.id }?.startDate
         val endDate = device.calendar?.activeRents?.firstOrNull { it.userId == currentUser.id }?.endDate
         binding.deviceName.text = device.name
@@ -79,6 +80,6 @@ class RentalRequestFragment :
         binding.userName.text = currentUser.userName
         if(startDate != null && endDate != null){
             binding.rentalInterval.text = "$startDate -- $endDate"
-        }
+        }*/
     }
 }
