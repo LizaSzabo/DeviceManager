@@ -10,7 +10,7 @@ class DeviceDetailsViewModel @Inject constructor(
     private val deviceDetailsPresenter: DeviceDetailsPresenter
 ) : RainbowCakeViewModel<DeviceDetailsViewState>(Initial) {
 
-    fun loadDeviceData(deviceId: Long) {
+    fun loadDeviceData(deviceId: String) {
         viewState = DataLoading
 
         val deviceData = mockDeviceData.firstOrNull { it.id == deviceId }

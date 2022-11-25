@@ -20,7 +20,7 @@ class RentalRequestDetailsFragment :
     private lateinit var binding: FragmentRequestDetailsBinding
     override fun provideViewModel() = getViewModelFromFactory()
     private val args: RentalRequestDetailsFragmentArgs by navArgs()
-    var deviceId: Long? = null
+    var deviceId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

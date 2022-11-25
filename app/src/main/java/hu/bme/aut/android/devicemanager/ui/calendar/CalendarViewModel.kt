@@ -16,7 +16,7 @@ class CalendarViewModel @Inject constructor(
     private val calendarPresenter: CalendarPresenter
 ) : RainbowCakeViewModel<CalendarViewState>(Initial) {
 
-    fun setSelectedDateToRentalRequest(deviceId: Long, startDay: LocalDate, endDate: LocalDate) {
+    fun setSelectedDateToRentalRequest(deviceId: String, startDay: LocalDate, endDate: LocalDate) {
         Log.i("startandendDate: ", startDay.toString() + " " + endDate.toString())
 
 

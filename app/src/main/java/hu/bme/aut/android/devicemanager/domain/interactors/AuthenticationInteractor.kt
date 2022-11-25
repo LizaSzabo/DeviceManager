@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.domain.interactors
 
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.token
 import hu.bme.aut.android.devicemanager.data.network.model.LoginNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.model.SignUpRequest
 import hu.bme.aut.android.devicemanager.data.network.source.LoginNetworkDataSource
@@ -25,6 +26,7 @@ class AuthenticationInteractor @Inject constructor(
                 NetworkError(loginResponse.errorMessage)
             }
             is NetworkResult -> {
+                token = loginResponse.result.token
                 NetworkResult(loginResponse.result)
             }
             UnknownHostError -> NetworkError("UnknownHostError")

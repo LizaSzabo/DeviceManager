@@ -22,33 +22,14 @@ class DeviceManagerApp : Application() {
             ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 2),
         )
         var calendar = Calendar(1, 1, activeRents)
-        val mockDeviceData = mutableListOf(
-            Device(id = 1, name = "device1", qrCode = "123456", calendar = calendar),
-            Device(id = 2, name = "device2", state = DeviceRentalState.Rented),
-            Device(id = 3, name = "device3")
+        val mockDeviceData = mutableListOf<Device>(
         )
-        val mockRentalRequestData = mutableListOf(
-            RentalRequest(
-                1,
-                Device(id = 1, name = "device1", qrCode = "123456"),
-                User(1, "User Name", ""),
-                RentalRequestStatus.Active
-            ),
-            RentalRequest(
-                2,
-                Device(id = 1, name = "device2"),
-                User(1, "User Name", ""),
-                RentalRequestStatus.Active
-            ),
-            RentalRequest(
-                3,
-                Device(id = 1, name = "device1", qrCode = "123456"),
-                User(2, "User Name2", ""),
-                RentalRequestStatus.Accepted
-            )
-        )
+        val mockRentalRequestData = mutableListOf<RentalRequest>()
         var userRole = UserRole.User
         var currentUser = User(1, "User Name", "123456")
+
+
+        var token = ""
     }
 
     override fun onCreate() {

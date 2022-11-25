@@ -65,7 +65,7 @@ class TakeBackFragment : RainbowCakeFragment<TakeBackViewState, TakeBackViewMode
                     binding.name.text = obj.getString("name")
                     binding.siteName.text = obj.getString("site_name")
                      */
-                    viewModel.takeBackDevice(result.contents, args.rentalRequestID, args.deviceID)
+                    viewModel.takeBackDevice(result.contents, args.rentalRequestID,args.deviceID)
                 } catch (e: JSONException) {
                     e.printStackTrace()
 

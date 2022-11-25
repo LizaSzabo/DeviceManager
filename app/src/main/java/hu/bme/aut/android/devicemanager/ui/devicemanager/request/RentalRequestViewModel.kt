@@ -10,7 +10,7 @@ class RentalRequestViewModel @Inject constructor(
     private val rentalRequestPresenter: RentalRequestPresenter
 ) : RainbowCakeViewModel<RentalRequestViewState>(Initial) {
 
-    fun loadData(deviceId: Long) {
+    fun loadData(deviceId: String) {
         viewState = DataLoading
 
         val device = mockDeviceData.firstOrNull { it.id == deviceId }

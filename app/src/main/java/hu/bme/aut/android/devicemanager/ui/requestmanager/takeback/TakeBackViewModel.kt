@@ -13,7 +13,7 @@ class TakeBackViewModel @Inject constructor(
     private val takeBackPresenter: TakeBackPresenter
 ) : RainbowCakeViewModel<TakeBackViewState>(Initial) {
 
-    fun takeBackDevice(qrCode: String, requestId: Long, deviceId: Long) {
+    fun takeBackDevice(qrCode: String, requestId: Long, deviceId: String) {
         val device = mockDeviceData.firstOrNull { it.id == deviceId }
         if (device?.qrCode == qrCode) {
             val rentalRequest = mockRentalRequestData.firstOrNull { it.id == requestId }

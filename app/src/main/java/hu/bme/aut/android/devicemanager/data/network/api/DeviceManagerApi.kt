@@ -1,10 +1,12 @@
 package hu.bme.aut.android.devicemanager.data.network.api
 
+import hu.bme.aut.android.devicemanager.data.network.model.DeviceResponse
 import hu.bme.aut.android.devicemanager.data.network.model.LoginNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.model.LoginNetworkResponse
 import hu.bme.aut.android.devicemanager.data.network.model.SignUpRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface DeviceManagerApi {
@@ -18,4 +20,8 @@ interface DeviceManagerApi {
     suspend fun loginUser(
         @Body loginRequest: LoginNetworkRequest
     ): LoginNetworkResponse
+
+
+    @GET("device")
+    suspend fun getDevices(@Header("Authorization") token: String): List<DeviceResponse>
 }

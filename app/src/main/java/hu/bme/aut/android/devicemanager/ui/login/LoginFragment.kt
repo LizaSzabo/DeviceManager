@@ -44,7 +44,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             if (binding.switchLoginRoleButton.isChecked) {
                 userRole = UserRole.Admin
                 if (!isInputError()) {
-                    viewModel.loginUser(
+                    viewModel.loginAdmin(
                         binding.userNameInput.text.toString(),
                         binding.passwordInput.text.toString()
                     )
@@ -52,7 +52,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             } else {
                 userRole = UserRole.User
                 if (!isInputError()) {
-                    viewModel.loginAdmin(
+                    viewModel.loginUser(
                         binding.userNameInput.text.toString(),
                         binding.passwordInput.text.toString()
                     )

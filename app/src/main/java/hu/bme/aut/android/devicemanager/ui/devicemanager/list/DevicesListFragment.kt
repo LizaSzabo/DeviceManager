@@ -1,18 +1,21 @@
 package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
 class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>(),
@@ -37,10 +40,28 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        viewModel.loadDevices()
     }
 
     override fun render(viewState: DevicesListViewState) {
-        //TODO("Not yet implemented")
+        when (viewState) {
+            is Initial -> {
+                binding.loading.isVisible = false
+            }
+            is DataLoading -> {
+                binding.loading.isVisible = true
+            }
+            is DataReady -> {
+                binding.loading.isVisible = false
+                Log.i("getDevicesssss", viewState.devices.toString())
+                devicesListAdapter.submitList(viewState.devices)
+            }
+            is LoadingError -> {
+                binding.loading.isVisible = false
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(binding.root, errorColor, viewState.message)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -48,9 +69,6 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         binding.rvDevices.layoutManager = LinearLayoutManager(context)
         devicesListAdapter.itemClickListener = this
         binding.rvDevices.adapter = devicesListAdapter
-        devicesListAdapter.addAllDevices(
-            mockDeviceData
-        )
     }
 
     override fun onItemClick(device: Device) {
