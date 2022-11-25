@@ -9,5 +9,5 @@ interface DeviceManagerApi {
     @POST("sign-up")
     suspend fun createUser(
         @Body signUpRequest: SignUpRequest,
-    ): String
+    )
 }

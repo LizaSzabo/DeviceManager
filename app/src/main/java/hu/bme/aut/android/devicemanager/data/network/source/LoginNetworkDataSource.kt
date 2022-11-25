@@ -10,7 +10,6 @@ class LoginNetworkDataSource(
 ) {
 
     suspend fun createUser(signUpRequest: SignUpRequest) = apiCall{
-        Log.i("UserRegister", deviceManagerApi.toString())
         deviceManagerApi.createUser(signUpRequest)
     }
 }

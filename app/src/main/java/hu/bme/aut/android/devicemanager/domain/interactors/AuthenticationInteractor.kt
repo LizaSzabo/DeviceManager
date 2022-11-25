@@ -6,7 +6,6 @@ import hu.bme.aut.android.devicemanager.data.network.source.LoginNetworkDataSour
 import hu.bme.aut.android.devicemanager.util.NetworkNoResult
 import hu.bme.aut.android.devicemanager.util.NetworkResponse
 import hu.bme.aut.android.devicemanager.util.NetworkResult
-import hu.bme.aut.android.devicemanager.util.PresentationNoResult
 import javax.inject.Inject
 
 class AuthenticationInteractor @Inject constructor(
@@ -19,9 +18,11 @@ class AuthenticationInteractor @Inject constructor(
             val createUserResponse = loginNetworkDataSource.createUser(signUpRequest)
         ) {
             is NetworkResult -> {
-                NetworkResult(createUserResponse.result)
+                Log.i("NetworkResponse", "NetworkResult")
+                NetworkResult("")
             }
             is NetworkNoResult -> {
+                Log.i("NetworkResponse", " NetworkNoResult")
                 createUserResponse
             }
         }
