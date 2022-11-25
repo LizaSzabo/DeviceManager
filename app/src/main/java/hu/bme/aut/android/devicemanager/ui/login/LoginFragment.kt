@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.login
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,10 @@ import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
+import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentLoginBinding
 import hu.bme.aut.android.devicemanager.util.UserRole
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
 class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
@@ -43,7 +46,12 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
             } else {
                 userRole = UserRole.User
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
+                if (!isInputError()) {
+                    viewModel.loginUser(
+                        binding.userNameInput.text.toString(),
+                        binding.passwordInput.text.toString()
+                    )
+                }
             }
         }
     }
@@ -77,9 +85,28 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             is Loading -> {
 
             }
-            is LoginSuccess -> {}
-            is LoginFail -> {}
+            is LoginSuccessWithUser -> {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
+            }
+            is LoginSuccessWithAdmin -> {}
+            is LoginFail -> {
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(binding.root, errorColor, viewState.message)
+            }
         }
+    }
+
+    private fun isInputError(): Boolean {
+        var error = false
+        if (binding.userNameInput.text.isEmpty()) {
+            binding.userNameInput.error = "User name cannot be empty!"
+            error = true
+        }
+        if (binding.passwordInput.text.isEmpty()) {
+            binding.passwordInput.error = "Password cannot be empty!"
+            error = true
+        }
+        return error
     }
 
 

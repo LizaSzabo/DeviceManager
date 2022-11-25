@@ -3,13 +3,13 @@ package hu.bme.aut.android.devicemanager.util
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-sealed class NetworkResponse<out T: Any>
+sealed class NetworkResponse<out T : Any>
 
 sealed class NetworkNoResult : NetworkResponse<Nothing>()
 
 class NetworkResult<out T : Any>(val result: T) : NetworkResponse<T>()
 
-class NetworkError(val errorMessage: String?= null, val code: Int? = null) : NetworkNoResult()
+class NetworkError(val errorMessage: String? = null, val code: Int? = null) : NetworkNoResult()
 
 object UnknownHostError : NetworkNoResult()
 
@@ -25,9 +25,9 @@ suspend fun <T : Any> apiCall(block: suspend () -> T): NetworkResponse<T> {
     } catch (unknownHost: UnknownHostException) {
         UnknownHostError
     } catch (httpException: HttpException) {
-            val errorMessage = getErrorMessage(httpException)
-            val code = httpException.code()
-            NetworkError(errorMessage, code)
+        val errorMessage = getErrorMessage(httpException)
+        val code = httpException.code()
+        NetworkError(errorMessage, code)
     }
 }
 

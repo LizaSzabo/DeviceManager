@@ -2,6 +2,9 @@ package hu.bme.aut.android.devicemanager.ui.login
 
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
+import hu.bme.aut.android.devicemanager.util.PresentationNoResult
+import hu.bme.aut.android.devicemanager.util.PresentationResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,6 +18,25 @@ class LoginViewModel @Inject constructor(
 
     fun switchToAdminMode() {
         viewState = InitialAdmin
+    }
+
+    fun loginUser(userName: String, password: String) = execute {
+        viewState = Loading
+        when (val loginResponse = loginPresenter.loginUser(userName, password)) {
+            is PresentationNetworkError -> {
+                viewState = if (loginResponse.message != null) {
+                    LoginFail(loginResponse.message)
+                } else {
+                    LoginFail("Network Error!")
+                }
+            }
+            is PresentationNoResult -> {
+
+            }
+            is PresentationResult ->{
+
+            }
+        }
     }
 
 }

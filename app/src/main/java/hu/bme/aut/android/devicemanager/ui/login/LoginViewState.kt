@@ -6,5 +6,6 @@ sealed class LoginViewState
 object InitialUser : LoginViewState()
 object InitialAdmin : LoginViewState()
 object Loading : LoginViewState()
-object LoginSuccess : LoginViewState()
+object LoginSuccessWithUser : LoginViewState()
+object LoginSuccessWithAdmin: LoginViewState()
 class LoginFail(val message: String) : LoginViewState()
