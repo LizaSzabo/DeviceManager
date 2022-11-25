@@ -1,11 +1,10 @@
 package hu.bme.aut.android.devicemanager.ui.register
 
-import android.content.res.Resources
+import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
-import hu.bme.aut.android.devicemanager.util.PresentationNoResult
+import hu.bme.aut.android.devicemanager.util.PresentationResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,14 +14,15 @@ class RegisterViewModel @Inject constructor(
 
     fun createUser(userName: String, password: String) = execute {
         viewState = RegisterLoading
-        viewState =
-            when (val createUserResponse = registerPresenter.createUser(userName, password)) {
-                is PresentationNoResult -> {
-                    RegisterSuccess
-                }
-                else -> {
-                    RegisterFail(Resources.getSystem().getString(R.string.unknown_error_text))
-                }
+        val createUserResponse = registerPresenter.createUser(userName, password)
+
+        viewState = when (createUserResponse) {
+            is PresentationResult -> {
+                RegisterSuccess
             }
+            is PresentationNetworkError -> {
+                RegisterFail(createUserResponse.message ?: "Unknown error")
+            }
+        }
     }
 }

@@ -35,4 +35,5 @@
     <string name="click_here_for_calendar_text">click here for Calendar</string>
     <string name="unknown_error_text">Unknown error!</string>
     <string name="create_user_success_message_text">User Creation Success</string>
+    <string name="cannot_register_user">Cannot register user</string>
 </resources>

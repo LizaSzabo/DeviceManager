@@ -1,10 +1,12 @@
 package hu.bme.aut.android.devicemanager.domain.interactors
 
+import android.util.Log
 import hu.bme.aut.android.devicemanager.data.network.model.SignUpRequest
 import hu.bme.aut.android.devicemanager.data.network.source.LoginNetworkDataSource
 import hu.bme.aut.android.devicemanager.util.NetworkNoResult
 import hu.bme.aut.android.devicemanager.util.NetworkResponse
 import hu.bme.aut.android.devicemanager.util.NetworkResult
+import hu.bme.aut.android.devicemanager.util.PresentationNoResult
 import javax.inject.Inject
 
 class AuthenticationInteractor @Inject constructor(

@@ -2,6 +2,7 @@ package hu.bme.aut.android.devicemanager.ui.register
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
