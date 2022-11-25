@@ -82,21 +82,26 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             is InitialUser -> {
                 binding.textViewAdmin.isVisible = false
                 binding.registrationLink.isVisible = true
+                binding.loading.isVisible = false
             }
             is InitialAdmin -> {
                 binding.textViewAdmin.isVisible = true
                 binding.registrationLink.isVisible = false
+                binding.loading.isVisible = false
             }
             is Loading -> {
-
+                binding.loading.isVisible = true
             }
             is LoginSuccessWithUser -> {
+                binding.loading.isVisible = false
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
             }
             is LoginSuccessWithAdmin -> {
+                binding.loading.isVisible = false
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
             }
             is LoginFail -> {
+                binding.loading.isVisible = false
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
             }

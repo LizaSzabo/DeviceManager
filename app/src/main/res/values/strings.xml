@@ -36,4 +36,6 @@
     <string name="unknown_error_text">Unknown error!</string>
     <string name="create_user_success_message_text">User Creation Success</string>
     <string name="cannot_register_user">Cannot register user</string>
+    <string name="add_new_device_as_administrator_button_description">Add new device as Administrator</string>
+    <string name="no_devices_text">No devices</string>
 </resources>

@@ -2,7 +2,6 @@ package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,17 +46,23 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         when (viewState) {
             is Initial -> {
                 binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
             }
             is DataLoading -> {
                 binding.loading.isVisible = true
+                binding.noDevicesText.isVisible = false
             }
             is DataReady -> {
                 binding.loading.isVisible = false
-                Log.i("getDevicesssss", viewState.devices.toString())
+                binding.noDevicesText.isVisible = false
                 devicesListAdapter.submitList(viewState.devices)
+                if (viewState.devices.isEmpty()) {
+                    binding.noDevicesText.isVisible = true
+                }
             }
             is LoadingError -> {
                 binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
             }
