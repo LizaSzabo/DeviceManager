@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.util.UserRole
 import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
@@ -39,6 +41,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupFloatingActionButtonVisibility()
         viewModel.loadDevices()
     }
 
@@ -84,5 +87,9 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
                 )
             )
         }
+    }
+
+    private fun setupFloatingActionButtonVisibility(){
+        binding.fab.isVisible = userRole != UserRole.User
     }
 }
