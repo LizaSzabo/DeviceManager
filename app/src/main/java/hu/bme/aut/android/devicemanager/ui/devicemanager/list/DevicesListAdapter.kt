@@ -64,6 +64,7 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
         devices -= devices
         devices += device
         submitList(devices)
+        notifyDataSetChanged()
     }
 
     companion object {

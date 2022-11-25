@@ -2,6 +2,7 @@ package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
 
         setupRecyclerView()
         setupFloatingActionButtonVisibility()
+        setupFloatingActionButton()
         viewModel.loadDevices()
     }
 
@@ -58,7 +60,8 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
             is DataReady -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
-                devicesListAdapter.submitList(viewState.devices)
+                Log.i("deviceeees", viewState.devices.toString())
+                devicesListAdapter.addAllDevices(viewState.devices)
                 if (viewState.devices.isEmpty()) {
                     binding.noDevicesText.isVisible = true
                 }
@@ -89,7 +92,13 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         }
     }
 
-    private fun setupFloatingActionButtonVisibility(){
+    private fun setupFloatingActionButtonVisibility() {
         binding.fab.isVisible = userRole != UserRole.User
+    }
+
+    private fun setupFloatingActionButton() {
+        binding.fab.setOnClickListener {
+            findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToAddDeviceDialogfragment())
+        }
     }
 }

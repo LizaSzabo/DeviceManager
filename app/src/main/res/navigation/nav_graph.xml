@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_devicesListFragment_to_deviceDetailsFragment"
             app:destination="@id/deviceDetailsFragment" />
+        <action
+            android:id="@+id/action_devicesListFragment_to_addDeviceDialogfragment"
+            app:destination="@id/addDeviceDialogfragment" />
     </fragment>
     <fragment
         android:id="@+id/deviceDetailsFragment"
@@ -107,4 +110,8 @@
             android:id="@+id/action_rentalRequestFragment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/addDeviceDialogfragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogfragment"
+        android:label="AddDeviceDialogfragment" />
 </navigation>
