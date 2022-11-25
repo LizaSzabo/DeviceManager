@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.util
 
+import android.util.Log
 import retrofit2.HttpException
 import java.net.UnknownHostException
 

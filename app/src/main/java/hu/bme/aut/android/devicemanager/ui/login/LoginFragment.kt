@@ -43,11 +43,16 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         binding.loginButton.setOnClickListener {
             if (binding.switchLoginRoleButton.isChecked) {
                 userRole = UserRole.Admin
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
+                if (!isInputError()) {
+                    viewModel.loginUser(
+                        binding.userNameInput.text.toString(),
+                        binding.passwordInput.text.toString()
+                    )
+                }
             } else {
                 userRole = UserRole.User
                 if (!isInputError()) {
-                    viewModel.loginUser(
+                    viewModel.loginAdmin(
                         binding.userNameInput.text.toString(),
                         binding.passwordInput.text.toString()
                     )
@@ -88,7 +93,9 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
             is LoginSuccessWithUser -> {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
             }
-            is LoginSuccessWithAdmin -> {}
+            is LoginSuccessWithAdmin -> {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
+            }
             is LoginFail -> {
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)

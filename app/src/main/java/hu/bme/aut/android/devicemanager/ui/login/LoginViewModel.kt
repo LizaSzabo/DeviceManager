@@ -22,19 +22,38 @@ class LoginViewModel @Inject constructor(
 
     fun loginUser(userName: String, password: String) = execute {
         viewState = Loading
-        when (val loginResponse = loginPresenter.loginUser(userName, password)) {
+        viewState = when (val loginResponse = loginPresenter.loginUser(userName, password)) {
             is PresentationNetworkError -> {
-                viewState = if (loginResponse.message != null) {
+                if (loginResponse.message != null) {
                     LoginFail(loginResponse.message)
                 } else {
                     LoginFail("Network Error!")
                 }
             }
             is PresentationNoResult -> {
-
+                LoginSuccessWithUser
             }
-            is PresentationResult ->{
+            is PresentationResult -> {
+                LoginSuccessWithUser
+            }
+        }
+    }
 
+    fun loginAdmin(userName: String, password: String) = execute {
+        viewState = Loading
+        viewState = when (val loginResponse = loginPresenter.loginUser(userName, password)) {
+            is PresentationNetworkError -> {
+                if (loginResponse.message != null) {
+                    LoginFail(loginResponse.message)
+                } else {
+                    LoginFail("Network Error!")
+                }
+            }
+            is PresentationNoResult -> {
+                LoginSuccessWithAdmin
+            }
+            is PresentationResult -> {
+                LoginSuccessWithAdmin
             }
         }
     }

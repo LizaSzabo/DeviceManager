@@ -13,5 +13,4 @@ class RegisterPresenter @Inject constructor(
         makeNetworkCall {
             authenticationInteractor.createUser(userName, password)
         }
-
 }
