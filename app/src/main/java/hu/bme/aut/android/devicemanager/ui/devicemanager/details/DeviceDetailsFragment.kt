@@ -13,8 +13,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDeviceDetailsBinding
+import hu.bme.aut.android.devicemanager.domain.model.Calendar
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
 import hu.bme.aut.android.devicemanager.util.UserRole
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class DeviceDetailsFragment :
@@ -69,9 +74,17 @@ class DeviceDetailsFragment :
     private fun showDeviceData(device: Device) {
         binding.deviceName.text = device.name
         binding.deviceState.text = device.state.toString()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val today = LocalDateTime.now().format(formatter)
+        if (device.state == DeviceRentalState.Available) {
+            binding.deviceFirstAvailableDate.text = today.toString()
+        } else if (device.calendar != null) {
+            binding.deviceFirstAvailableDate.text =
+                getFirstAvailableDate(device.calendar as MutableList<Calendar>)
+        } else {
+            binding.deviceFirstAvailableDate.text = ""
+        }
 
-        //TODO: change mock data
-        binding.deviceFirstAvailableDate.text = "2023.02.15"
     }
 
     private fun setupUserRole() {
@@ -92,5 +105,23 @@ class DeviceDetailsFragment :
                 )
             )
         }
+    }
+
+    private fun getFirstAvailableDate(calendarList: MutableList<Calendar>): String {
+        calendarList.sortBy { it.from }
+        val today = LocalDateTime.now()
+        var firstAvailableDateString = ""
+        for (calendar in calendarList) {
+            if (calendar.to >= today.toString()) {
+                val lastRentedDate = LocalDateTime.parse(calendar.to)
+                val firstAvailableDate = LocalDate.of(
+                    lastRentedDate.year,
+                    lastRentedDate.month,
+                    lastRentedDate.dayOfMonth
+                ).plusDays(1)
+                firstAvailableDateString = firstAvailableDate.toString()
+            }
+        }
+        return firstAvailableDateString
     }
 }
