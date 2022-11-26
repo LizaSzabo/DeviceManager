@@ -16,11 +16,6 @@ import java.time.LocalDate
 class DeviceManagerApp : Application() {
 
     companion object {
-        val activeRents = mutableListOf(
-            ActiveRent(3, LocalDate.of(2022, 10, 1), LocalDate.of(2022, 10, 4), 2),
-            ActiveRent(2, LocalDate.of(2022, 10, 7), LocalDate.of(2022, 10, 10), 2),
-            ActiveRent(1, LocalDate.of(2022, 10, 15), LocalDate.of(2022, 10, 16), 2),
-        )
         val mockDeviceData = mutableListOf<Device>(
         )
         val mockRentalRequestData = mutableListOf<RentalRequest>()

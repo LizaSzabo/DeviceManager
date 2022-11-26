@@ -2,12 +2,15 @@ package hu.bme.aut.android.devicemanager.data.db.source
 
 import hu.bme.aut.android.devicemanager.data.db.dao.CalendarDao
 import hu.bme.aut.android.devicemanager.data.db.dao.DeviceDao
+import hu.bme.aut.android.devicemanager.data.db.dao.ListDeviceDao
 import hu.bme.aut.android.devicemanager.data.db.model.RoomCalendar
 import hu.bme.aut.android.devicemanager.data.db.model.RoomDevice
+import hu.bme.aut.android.devicemanager.data.db.model.RoomListDeviceID
 
 class DeviceDataSource(
     private val deviceDao: DeviceDao,
     private val calendarDao: CalendarDao,
+    private val listDeviceDao: ListDeviceDao,
 ) {
 
     fun saveDeviceToDb(roomDevice: RoomDevice) {
@@ -22,11 +25,23 @@ class DeviceDataSource(
         return deviceDao.getDevice(deviceId)
     }
 
+    fun getCalendarFromDb(calendarId: String): List<RoomCalendar> {
+        return calendarDao.getCalendar(calendarId)
+    }
+
     fun deleteAllDevices() {
         deviceDao.deleteDevices()
     }
 
     fun deleteAllCalendars() {
         calendarDao.deleteCalendars()
+    }
+
+    fun saveDeviceIdList(roomListDeviceID: List<RoomListDeviceID>) {
+        listDeviceDao.saveDeviceIds(roomListDeviceID)
+    }
+
+    fun getDeviceIdsList(): List<RoomListDeviceID> {
+        return listDeviceDao.getDeviceIds()
     }
 }

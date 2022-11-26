@@ -63,7 +63,6 @@ class RentalRequestDetailsFragment :
                 showRequestData(viewState.rentalRequest)
                 binding.buttonTakeBack.isEnabled = true
                 binding.buttonAccept.isEnabled = false
-                deviceId = viewState.rentalRequest.device?.id
             }
             is RentalRequestClosed -> {
                 binding.loading.isVisible = false
@@ -85,8 +84,8 @@ class RentalRequestDetailsFragment :
     }
 
     private fun showRequestData(rentalRequest: RentalRequest) {
-        binding.deviceId.text = rentalRequest.device?.id.toString()
-        binding.deviceName.text = rentalRequest.device?.name
+        binding.deviceId.text = ""
+        binding.deviceName.text = rentalRequest.deviceName
         binding.userName.text = rentalRequest.user?.userName
         binding.requestId.text = rentalRequest.id.toString()
         binding.rentalRequestStatus.text = rentalRequest.status.toString()

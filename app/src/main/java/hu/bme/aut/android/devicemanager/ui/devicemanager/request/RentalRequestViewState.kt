@@ -6,8 +6,12 @@ sealed class RentalRequestViewState
 
 object Initial : RentalRequestViewState()
 
-object DataLoading : RentalRequestViewState()
+object Loading : RentalRequestViewState()
 
 class DataReady(val device: Device) : RentalRequestViewState()
 
+object RentalRequestSaveSuccess: RentalRequestViewState()
+
 class DataLoadingFailed(val errorMessage: String) : RentalRequestViewState()
+
+class RentalRequestSaveFailed(val errorMessage: String) : RentalRequestViewState()

@@ -48,7 +48,7 @@ class RequestListAdapter :
         val rentalRequest = rentalRequests[position]
 
         holder.rentalRequest = rentalRequest
-        holder.tvDeviceName.text = rentalRequest.device?.name
+        holder.tvDeviceName.text = rentalRequest.deviceName
 
         when (rentalRequest.status) {
             RentalRequestStatus.Accepted -> {

@@ -101,7 +101,9 @@ class DeviceDetailsFragment :
         binding.buttonRent.setOnClickListener {
             findNavController().navigate(
                 DeviceDetailsFragmentDirections.actionDeviceDetailsFragmentToRentalRequestFragment(
-                    args.deviceID
+                    args.deviceID,
+                    "",
+                    ""
                 )
             )
         }

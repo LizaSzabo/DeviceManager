@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.calendar
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentCalendarBinding
+import hu.bme.aut.android.devicemanager.domain.model.ActiveRent
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 import java.time.LocalDate
 import java.util.*
 
@@ -39,44 +43,55 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // binding.calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_RANGE
 
         setupCalendar()
+        /*  val activeRentOnDevice = device?.calendar?.activeRents
+          val disableDates = mutableListOf<Calendar>()
 
-        val calendar1: Calendar = Calendar.getInstance()
-        calendar1.set(2022, 11, 16)
+          Log.i("activeRentOnDevice", activeRentOnDevice.toString())
 
-        val device = mockDeviceData.firstOrNull { it.id == args.deviceID }
-      /*  val activeRentOnDevice = device?.calendar?.activeRents
-        val disableDates = mutableListOf<Calendar>()
-
-        Log.i("activeRentOnDevice", activeRentOnDevice.toString())
-
-        if (activeRentOnDevice != null) {
-            for (activeRent in activeRentOnDevice) {
-                if (activeRent.startDate != null && activeRent.endDate != null) {
-                    for (activeRentDate in activeRent.startDate..activeRent.endDate) {
-                        val calendar: Calendar = Calendar.getInstance()
-                        calendar.set(
-                            activeRentDate.year,
-                            activeRentDate.monthValue,
-                            activeRentDate.dayOfMonth
-                        )
-                        disableDates.add(calendar)
-                    }
-                }
-            }
-        }
-        Log.i("activeRentOnDeviceDisabledDates", disableDates.size.toString())
-        binding.calendarView.setDisabledDays(disableDates)*/
+          if (activeRentOnDevice != null) {
+              for (activeRent in activeRentOnDevice) {
+                  if (activeRent.startDate != null && activeRent.endDate != null) {
+                      for (activeRentDate in activeRent.startDate..activeRent.endDate) {
+                          val calendar: Calendar = Calendar.getInstance()
+                          calendar.set(
+                              activeRentDate.year,
+                              activeRentDate.monthValue,
+                              activeRentDate.dayOfMonth
+                          )
+                          disableDates.add(calendar)
+                      }
+                  }
+              }
+          }
+          Log.i("activeRentOnDeviceDisabledDates", disableDates.size.toString())
+          binding.calendarView.setDisabledDays(disableDates)*/
 
         /* binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
 
+        viewModel.getActiveRents(args.deviceID)
         setupSelectButton()
     }
 
     override fun render(viewState: CalendarViewState) {
-        //TODO("Not yet implemented")
+        when (viewState) {
+            is Initial -> {
+                binding.loading.isVisible = false
+            }
+            is Loading -> {
+                binding.loading.isVisible = true
+            }
+            is DataReady -> {
+                binding.loading.isVisible = false
+                setupDisableDates(viewState.activeRents)
+            }
+            is DataLoadingError -> {
+                binding.loading.isVisible = false
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(binding.root, errorColor, viewState.errorMessage)
+            }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -101,8 +116,32 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
                 selectedDates.last().get(Calendar.MONTH) + 1,
                 selectedDates.last().get(Calendar.DAY_OF_MONTH)
             )
-            viewModel.setSelectedDateToRentalRequest(args.deviceID, startDay, endDay)
+            findNavController().navigate(
+                CalendarFragmentDirections.actionCalendarFragmentToRentalRequestFragment(
+                    args.deviceID,
+                    startDay.toString(),
+                    endDay.toString(),
+                )
+            )
         }
+    }
+
+    private fun setupDisableDates(activeRentsOnDevice: List<ActiveRent>) {
+        val disableDates = mutableListOf<Calendar>()
+        Log.i("DisableddatessetupDisableDates", activeRentsOnDevice.toString())
+        for (activeRent in activeRentsOnDevice) {
+            for (activeRentDate in activeRent.startDate..activeRent.endDate) {
+                val calendar: Calendar = Calendar.getInstance()
+                calendar.set(
+                    activeRentDate.year,
+                    activeRentDate.monthValue,
+                    activeRentDate.dayOfMonth
+                )
+                disableDates.add(calendar)
+            }
+        }
+
+        binding.calendarView.setDisabledDays(disableDates)
     }
 
     operator fun ClosedRange<LocalDate>.iterator(): Iterator<LocalDate> {

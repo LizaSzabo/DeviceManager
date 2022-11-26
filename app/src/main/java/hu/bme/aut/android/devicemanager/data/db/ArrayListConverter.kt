@@ -15,7 +15,7 @@ class ArrayListConverter {
     @TypeConverter
     fun toStringArrayList(value: String): ArrayList<String> {
         return try {
-            Gson().fromJson<ArrayList<String>>(value)
+            Gson().fromJson(value)
         } catch (e: Exception) {
             arrayListOf()
         }
@@ -23,4 +23,4 @@ class ArrayListConverter {
 }
 
 inline fun <reified T> Gson.fromJson(json: String): T =
-    fromJson<T>(json, object : TypeToken<T>() {}.type)
+    fromJson(json, object : TypeToken<T>() {}.type)

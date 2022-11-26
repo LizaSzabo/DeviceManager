@@ -12,7 +12,7 @@ class RentalRequestDetailsViewModel @Inject constructor(
     private val rentalRequestPresenter: RentalRequestDetailsPresenter
 ) : RainbowCakeViewModel<RentalRequestDetailsViewState>(Initial) {
 
-    fun loadRentalRequestData(rentalRequestId: Long) {
+    fun loadRentalRequestData(rentalRequestId: String) {
         viewState = RentalRequestDataLoading
 
         val rentalRequestData =

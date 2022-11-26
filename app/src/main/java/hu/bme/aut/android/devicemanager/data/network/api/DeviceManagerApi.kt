@@ -42,4 +42,15 @@ interface DeviceManagerApi {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): DeviceDeleteResponse
+
+    @POST("rental")
+    suspend fun saveRentalRequest(
+        @Header("Authorization") token: String,
+        @Body rentalNetworkRequest: RentalNetworkRequest,
+    ): RentalNetworkResponse
+
+    @GET("rental")
+    suspend fun getRentalRequests(
+        @Header("Authorization") token: String,
+    ): List<GetRentalRequestResponse>
 }

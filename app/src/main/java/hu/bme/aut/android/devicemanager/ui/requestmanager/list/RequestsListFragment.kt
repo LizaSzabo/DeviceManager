@@ -1,17 +1,20 @@
 package hu.bme.aut.android.devicemanager.ui.requestmanager.list
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import dagger.hilt.android.AndroidEntryPoint
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockRentalRequestData
+import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentRequestsListBinding
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
 class RequestsListFragment : RainbowCakeFragment<RequestsListViewState, RequestsListViewModel>(),
@@ -34,10 +37,34 @@ class RequestsListFragment : RainbowCakeFragment<RequestsListViewState, Requests
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        viewModel.loadRentalRequests()
     }
 
     override fun render(viewState: RequestsListViewState) {
-        // TODO("Not yet implemented")
+        when (viewState) {
+            Initial -> {
+                binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
+            }
+            RentalRequestsLoading -> {
+                binding.loading.isVisible = true
+                binding.noDevicesText.isVisible = false
+            }
+            is RentalRequestsError -> {
+                binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(binding.root, errorColor, viewState.errorMessage)
+            }
+            is RentalRequestsReady -> {
+                binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
+                requestListAdapter.addAllRentalRequests(viewState.requests)
+                if (viewState.requests.isEmpty()) {
+                    binding.noDevicesText.isVisible = true
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -45,18 +72,13 @@ class RequestsListFragment : RainbowCakeFragment<RequestsListViewState, Requests
         binding.rvRentalRequest.layoutManager = LinearLayoutManager(context)
         requestListAdapter.itemClickListener = this
         binding.rvRentalRequest.adapter = requestListAdapter
-        requestListAdapter.addAllRentalRequests(
-            mockRentalRequestData
-        )
     }
 
     override fun onItemClick(rentalRequest: RentalRequest) {
-        rentalRequest.id?.let {
-            findNavController().navigate(
-                RequestsListFragmentDirections.actionRequestsListFragmentToRentalRequestDetailsFragment(
-                    it
-                )
+        findNavController().navigate(
+            RequestsListFragmentDirections.actionRequestsListFragmentToRentalRequestDetailsFragment(
+                rentalRequest.id
             )
-        }
+        )
     }
 }

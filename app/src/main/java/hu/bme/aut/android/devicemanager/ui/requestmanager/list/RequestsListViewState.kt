@@ -10,3 +10,4 @@ object RentalRequestsLoading : RequestsListViewState()
 
 class RentalRequestsReady(val requests: List<RentalRequest>) : RequestsListViewState()
 
+class RentalRequestsError(val errorMessage: String) : RequestsListViewState()

@@ -42,4 +42,5 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="save_button_text">Add</string>
     <string name="delete_button">Delete button</string>
+    <string name="no_rental_requests_text">No requests</string>
 </resources>

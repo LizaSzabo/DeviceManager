@@ -13,7 +13,7 @@ class RentalRequestViewModel @Inject constructor(
 ) : RainbowCakeViewModel<RentalRequestViewState>(Initial) {
 
     fun loadData(deviceId: String) = execute {
-        viewState = DataLoading
+        viewState = Loading
 
         viewState = when (val deviceData = rentalRequestPresenter.getDevice(deviceId)) {
             is PresentationResult -> {
@@ -27,5 +27,24 @@ class RentalRequestViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun saveRentalRequest(deviceId: String, startDate: String, endDate: String) = execute {
+        viewState = Loading
+
+        viewState =
+            when (val saveRentalRequestResponse =
+                rentalRequestPresenter.saveRentalRequest(deviceId, startDate, endDate)) {
+                is PresentationResult -> {
+                    RentalRequestSaveSuccess
+                }
+                is PresentationNetworkError -> {
+                    if (saveRentalRequestResponse.message != null) {
+                        RentalRequestSaveFailed(saveRentalRequestResponse.message)
+                    } else {
+                        RentalRequestSaveFailed("Network error!")
+                    }
+                }
+            }
     }
 }
