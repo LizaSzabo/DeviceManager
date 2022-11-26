@@ -2,7 +2,6 @@ package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,6 +71,19 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
             }
+            is DeleteError -> {
+                binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(binding.root, errorColor, viewState.message)
+            }
+            DeleteSuccess -> {
+                binding.loading.isVisible = false
+                binding.noDevicesText.isVisible = false
+                val errorColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
+                showSnackBar(binding.root, errorColor, "Successfully deleted!")
+                refreshList()
+            }
         }
     }
 
@@ -124,5 +136,9 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
                 deviceId?.let { viewModel.deleteDevice(it) }
             }
             .show()
+    }
+
+    private fun refreshList() {
+        viewModel.loadDevices()
     }
 }

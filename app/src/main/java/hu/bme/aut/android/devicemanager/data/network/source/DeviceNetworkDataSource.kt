@@ -23,6 +23,7 @@ class DeviceNetworkDataSource(
     }
 
     suspend fun deleteDevice(deviceId: String) = apiCall {
-        deviceManagerApi.deleteDevice(deviceId, token, deviceId)
+        Log.i("apiCalldelete", "delete")
+        deviceManagerApi.deleteDevice(token, deviceId)
     }
 }

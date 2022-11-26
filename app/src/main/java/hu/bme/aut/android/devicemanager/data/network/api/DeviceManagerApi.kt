@@ -37,10 +37,9 @@ interface DeviceManagerApi {
         @Header("Authorization") token: String
     ): DeviceResponse
 
-    @DELETE("device/{pathId}")
+    @DELETE("device/{id}")
     suspend fun deleteDevice(
-        @Path("id") pathId: String,
         @Header("Authorization") token: String,
-        @Body id: String
+        @Path("id") id: String,
     ): DeviceDeleteResponse
 }

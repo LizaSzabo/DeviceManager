@@ -64,9 +64,11 @@ class DeviceInteractor @Inject constructor(
     suspend fun deleteDevice(deviceId: String): NetworkResponse<Boolean> {
         return when (val deleteDeviceResponse = deviceNetworkDataSource.deleteDevice(deviceId)) {
             is NetworkError -> {
+                Log.i("deleteError", "error")
                 NetworkError(deleteDeviceResponse.errorMessage)
             }
             is NetworkResult -> {
+                Log.i("deleteSuccess", "success")
                 NetworkResult(deleteDeviceResponse.result.isSuccessful)
             }
             UnknownHostError -> NetworkError("UnknownHostError")
