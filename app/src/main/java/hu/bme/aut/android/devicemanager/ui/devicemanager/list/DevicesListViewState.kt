@@ -7,8 +7,12 @@ sealed class DevicesListViewState()
 
 object Initial : DevicesListViewState()
 
-object DataLoading : DevicesListViewState()
+object Loading : DevicesListViewState()
 
 class DataReady(val devices: List<Device>) : DevicesListViewState()
 
-class LoadingError(val message:  String) : DevicesListViewState()
+class LoadingError(val message: String) : DevicesListViewState()
+
+class DeleteError(val message: String) : DevicesListViewState()
+
+object DeleteSuccess : DevicesListViewState()

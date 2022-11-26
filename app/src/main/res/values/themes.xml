@@ -14,18 +14,43 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="CalendarWidgetHeader" >
+    <style name="CalendarWidgetHeader">
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/dark_orange_text</item>
     </style>
-    <style name="CalendarWidgetWeekDay" >
+
+    <style name="CalendarWidgetWeekDay">
         <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/dark_orange_grey_text</item>
     </style>
-    <style name="CalendarWidgetDate" >
+
+    <style name="CalendarWidgetDate">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AlertDialogText" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/dark_orange_grey_text</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="AlertDialogBodyText" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/dark_orange_text</item>
+    </style>
+
+    <style name="AlertDialogButtonText" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColor">@color/dark_orange_grey_text</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="titleTextStyle">@style/AlertDialogText</item>
+        <item name="textAppearanceBody1">@style/AlertDialogBodyText</item>
+        <item name="actionButtonStyle">@style/AlertDialogButtonText</item>
     </style>
 </resources>

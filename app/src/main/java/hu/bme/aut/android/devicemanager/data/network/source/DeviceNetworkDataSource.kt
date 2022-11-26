@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.data.network.source
 
+import android.util.Log
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.token
 import hu.bme.aut.android.devicemanager.data.network.api.DeviceManagerApi
 import hu.bme.aut.android.devicemanager.data.network.model.AddDeviceRequest
@@ -19,5 +20,9 @@ class DeviceNetworkDataSource(
 
     suspend fun getDevice(deviceId: String) = apiCall {
         deviceManagerApi.getDevice(deviceId, token)
+    }
+
+    suspend fun deleteDevice(deviceId: String) = apiCall {
+        deviceManagerApi.deleteDevice(deviceId, token, deviceId)
     }
 }

@@ -1,6 +1,6 @@
 package hu.bme.aut.android.devicemanager.data.network.source
 
-import android.util.Log
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.token
 import hu.bme.aut.android.devicemanager.data.network.api.DeviceManagerApi
 import hu.bme.aut.android.devicemanager.data.network.model.LoginNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.model.SignUpRequest
@@ -16,5 +16,9 @@ class LoginNetworkDataSource(
 
     suspend fun loginUser(loginRequest: LoginNetworkRequest) = apiCall {
         deviceManagerApi.loginUser(loginRequest)
+    }
+
+    suspend fun createAdmin(signUpRequest: SignUpRequest) = apiCall {
+        deviceManagerApi.createAdmin(token, signUpRequest)
     }
 }

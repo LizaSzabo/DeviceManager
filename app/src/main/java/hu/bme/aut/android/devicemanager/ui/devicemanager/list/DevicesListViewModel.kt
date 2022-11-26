@@ -13,7 +13,7 @@ class DevicesListViewModel @Inject constructor(
 ) : RainbowCakeViewModel<DevicesListViewState>(Initial) {
 
     fun loadDevices() = execute {
-        viewState = DataLoading
+        viewState = Loading
         viewState = when (val devicesResponse = devicesListPresenter.loadDevices()) {
             is PresentationNetworkError -> {
                 if (devicesResponse.message != null) {
@@ -27,6 +27,25 @@ class DevicesListViewModel @Inject constructor(
             }
             is PresentationResult -> {
                 DataReady(devicesResponse.result)
+            }
+        }
+    }
+
+    fun deleteDevice(deviceId: String) = execute {
+        viewState = Loading
+        viewState = when (val deleteResult = devicesListPresenter.deleteDevice(deviceId)) {
+            is PresentationNetworkError -> {
+                if (deleteResult.message != null) {
+                    DeleteError(deleteResult.message)
+                } else {
+                    DeleteError("Network Error!")
+                }
+            }
+            is PresentationNoResult -> {
+                DeleteSuccess
+            }
+            is PresentationResult -> {
+                DeleteSuccess
             }
         }
     }

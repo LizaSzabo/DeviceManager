@@ -41,4 +41,5 @@
     <string name="add_new_device_title">Add new Device</string>
     <string name="cancel_button_text">Cancel</string>
     <string name="save_button_text">Add</string>
+    <string name="delete_button">Delete button</string>
 </resources>

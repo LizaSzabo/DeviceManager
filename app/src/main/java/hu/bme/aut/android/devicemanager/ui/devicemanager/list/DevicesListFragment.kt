@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,14 +54,13 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
             }
-            is DataLoading -> {
+            is Loading -> {
                 binding.loading.isVisible = true
                 binding.noDevicesText.isVisible = false
             }
             is DataReady -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
-                Log.i("deviceeees", viewState.devices.toString())
                 devicesListAdapter.addAllDevices(viewState.devices)
                 if (viewState.devices.isEmpty()) {
                     binding.noDevicesText.isVisible = true
@@ -92,6 +92,15 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         }
     }
 
+    override fun onDeleteClick(device: Device) {
+        showAlterDiagram(
+            device.name,
+            "Delete this device permanently?",
+            R.style.AlertDialogTheme,
+            device.id
+        )
+    }
+
     private fun setupFloatingActionButtonVisibility() {
         binding.fab.isVisible = userRole != UserRole.User
     }
@@ -100,5 +109,20 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         binding.fab.setOnClickListener {
             findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToAddDeviceDialogfragment())
         }
+    }
+
+    private fun showAlterDiagram(
+        title: String,
+        message: String,
+        dialogStyleId: Int,
+        deviceId: String?
+    ) {
+        AlertDialog.Builder(requireContext(), dialogStyleId)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("OK") { _, i ->
+                deviceId?.let { viewModel.deleteDevice(it) }
+            }
+            .show()
     }
 }

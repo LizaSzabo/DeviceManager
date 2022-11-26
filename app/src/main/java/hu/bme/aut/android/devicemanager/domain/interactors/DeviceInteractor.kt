@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.domain.interactors
 
+import android.util.Log
 import hu.bme.aut.android.devicemanager.data.network.source.DeviceNetworkDataSource
 import hu.bme.aut.android.devicemanager.domain.model.Device
 import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
@@ -54,6 +55,19 @@ class DeviceInteractor @Inject constructor(
                         calendar = getDeviceResponse.result.calendar
                     )
                 NetworkResult(device)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
+
+    suspend fun deleteDevice(deviceId: String): NetworkResponse<Boolean> {
+        return when (val deleteDeviceResponse = deviceNetworkDataSource.deleteDevice(deviceId)) {
+            is NetworkError -> {
+                NetworkError(deleteDeviceResponse.errorMessage)
+            }
+            is NetworkResult -> {
+                NetworkResult(deleteDeviceResponse.result.isSuccessful)
             }
             UnknownHostError -> NetworkError("UnknownHostError")
         }

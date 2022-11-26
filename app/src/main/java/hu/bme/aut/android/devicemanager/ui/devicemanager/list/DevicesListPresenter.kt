@@ -15,4 +15,10 @@ class DevicesListPresenter @Inject constructor(
             interactor = { deviceInteractor.getDevices() },
             converter = { it }
         )
+
+    suspend fun deleteDevice(deviceId: String): PresentationResponse<Boolean> =
+        makeNetworkCall(
+            interactor = { deviceInteractor.deleteDevice(deviceId) },
+            converter = { it }
+        )
 }

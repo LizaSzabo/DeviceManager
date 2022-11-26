@@ -20,7 +20,7 @@ class CalendarViewModel @Inject constructor(
 
 
         //TODO: delete old values if any
-        activeRents.add(
+        /*activeRents.add(
             ActiveRent(
                 id = 0,
                 startDate = startDay,
@@ -37,6 +37,6 @@ class CalendarViewModel @Inject constructor(
 
        // val modifiedDeviceData = deviceData.copy(calendar = calendar)
 
-        //mockDeviceData[index] = modifiedDeviceData
+        //mockDeviceData[index] = modifiedDeviceData*/
     }
 }

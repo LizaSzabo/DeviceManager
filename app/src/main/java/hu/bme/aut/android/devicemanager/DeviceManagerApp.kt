@@ -25,8 +25,7 @@ class DeviceManagerApp : Application() {
         )
         val mockRentalRequestData = mutableListOf<RentalRequest>()
         var userRole = UserRole.User
-        var currentUser = User(1, "User Name", "123456")
-
+        lateinit var currentUser : User
 
         var token = ""
     }

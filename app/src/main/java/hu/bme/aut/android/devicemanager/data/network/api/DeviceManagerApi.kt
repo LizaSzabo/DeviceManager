@@ -10,6 +10,12 @@ interface DeviceManagerApi {
         @Body signUpRequest: SignUpRequest,
     )
 
+    @POST("sign-up/admin")
+    suspend fun createAdmin(
+        @Header("Authorization") token: String,
+        @Body signUpRequest: SignUpRequest,
+    )
+
     @POST("sign-in")
     suspend fun loginUser(
         @Body loginRequest: LoginNetworkRequest
@@ -30,4 +36,11 @@ interface DeviceManagerApi {
         @Path("id") id: String,
         @Header("Authorization") token: String
     ): DeviceResponse
+
+    @DELETE("device/{pathId}")
+    suspend fun deleteDevice(
+        @Path("id") pathId: String,
+        @Header("Authorization") token: String,
+        @Body id: String
+    ): DeviceDeleteResponse
 }
