@@ -5,7 +5,6 @@ import hu.bme.aut.android.devicemanager.data.db.model.RoomCalendar
 import hu.bme.aut.android.devicemanager.data.db.model.RoomDevice
 import hu.bme.aut.android.devicemanager.data.db.model.RoomListDeviceID
 import hu.bme.aut.android.devicemanager.data.db.source.DeviceDataSource
-import hu.bme.aut.android.devicemanager.data.network.model.RentalNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.source.DeviceNetworkDataSource
 import hu.bme.aut.android.devicemanager.domain.model.ActiveRent
 import hu.bme.aut.android.devicemanager.domain.model.Calendar
@@ -128,6 +127,49 @@ class DeviceInteractor @Inject constructor(
         }
     }
 
+    private suspend fun getDeviceFromNetwork(deviceId: String): NetworkResponse<Device> {
+        return when (val getDeviceResponse = deviceNetworkDataSource.getDevice(deviceId)) {
+            is NetworkError -> {
+                NetworkError(getDeviceResponse.errorMessage)
+            }
+            is NetworkResult -> {
+                val state: DeviceRentalState =
+                    if (getDeviceResponse.result.state == "AVAILABLE") DeviceRentalState.Available else DeviceRentalState.Rented
+                val device =
+                    Device(
+                        id = getDeviceResponse.result.id,
+                        name = getDeviceResponse.result.name,
+                        state = state,
+                        calendar = getDeviceResponse.result.calendar
+                    )
+
+                val calendarIds = getDeviceResponse.result.calendar.map { it.id }
+                deviceDataSource.saveDeviceToDb(
+                    RoomDevice(
+                        id = getDeviceResponse.result.id,
+                        name = getDeviceResponse.result.name,
+                        state = getDeviceResponse.result.state,
+                        calendarIds = calendarIds as ArrayList<String>,
+                    )
+                )
+                getDeviceResponse.result.calendar.forEach { calendar ->
+                    deviceDataSource.saveCalendarToDb(
+                        RoomCalendar(
+                            id = calendar.id,
+                            userId = calendar.userId,
+                            userName = calendar.username,
+                            from = calendar.from,
+                            to = calendar.to,
+                        )
+                    )
+                }
+
+                NetworkResult(device)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
 
     suspend fun deleteDevice(deviceId: String): NetworkResponse<Boolean> {
         return when (val deleteDeviceResponse = deviceNetworkDataSource.deleteDevice(deviceId)) {
@@ -144,7 +186,7 @@ class DeviceInteractor @Inject constructor(
 
     suspend fun getActiveRents(deviceId: String): NetworkResponse<List<ActiveRent>> {
         val activeRentsList = mutableListOf<ActiveRent>()
-        when (val device = getDevice(deviceId)) {
+        return when (val device = getDeviceFromNetwork(deviceId)) {
             is NetworkResult -> {
                 val calendars = device.result.calendar
                 calendars?.forEach { calendar ->
@@ -152,15 +194,15 @@ class DeviceInteractor @Inject constructor(
                         ActiveRent(calendar.from.toLocalDate(), calendar.to.toLocalDate())
                     activeRentsList.add(activeRent)
                 }
+                NetworkResult(activeRentsList)
             }
-            is NetworkError -> return NetworkError(device.errorMessage)
-            UnknownHostError -> return NetworkError("UnknownHostError")
+            is NetworkError -> NetworkError(device.errorMessage)
+            UnknownHostError -> NetworkError("UnknownHostError")
         }
-        return NetworkResult(activeRentsList)
     }
 
     private fun String.toLocalDate(): LocalDate {
-        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         return LocalDate.parse(this, formatter)
     }
 }

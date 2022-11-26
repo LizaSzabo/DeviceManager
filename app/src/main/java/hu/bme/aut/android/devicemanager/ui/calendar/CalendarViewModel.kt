@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.calendar
 
+import android.util.Log
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
@@ -16,6 +17,7 @@ class CalendarViewModel @Inject constructor(
 
         viewState = when (val deviceData = calendarPresenter.getActiveRents(deviceId)) {
             is PresentationResult -> {
+                Log.i("getActiveRentals", deviceData.result.toString())
                 DataReady(deviceData.result)
             }
             is PresentationNetworkError -> {

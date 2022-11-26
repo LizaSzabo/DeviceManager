@@ -3,7 +3,6 @@ package hu.bme.aut.android.devicemanager.ui.calendar
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -105,36 +104,43 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
     private fun setupSelectButton() {
         binding.selectDateButton.setOnClickListener {
             val selectedDates: List<Calendar> = binding.calendarView.selectedDates
-            Log.i("selectedDates: ", selectedDates.toString())
-            val startDay = LocalDate.of(
-                binding.calendarView.firstSelectedDate.get(Calendar.YEAR),
-                binding.calendarView.firstSelectedDate.get(Calendar.MONTH) + 1,
-                binding.calendarView.firstSelectedDate.get(Calendar.DAY_OF_MONTH)
-            )
-            val endDay = LocalDate.of(
-                selectedDates.last().get(Calendar.YEAR),
-                selectedDates.last().get(Calendar.MONTH) + 1,
-                selectedDates.last().get(Calendar.DAY_OF_MONTH)
-            )
-            findNavController().navigate(
-                CalendarFragmentDirections.actionCalendarFragmentToRentalRequestFragment(
-                    args.deviceID,
-                    startDay.toString(),
-                    endDay.toString(),
+            if (selectedDates.isNotEmpty()) {
+                val startDay = LocalDate.of(
+                    binding.calendarView.firstSelectedDate.get(Calendar.YEAR),
+                    binding.calendarView.firstSelectedDate.get(Calendar.MONTH) + 1,
+                    binding.calendarView.firstSelectedDate.get(Calendar.DAY_OF_MONTH)
                 )
-            )
+                val endDay = LocalDate.of(
+                    selectedDates.last().get(Calendar.YEAR),
+                    selectedDates.last().get(Calendar.MONTH) + 1,
+                    selectedDates.last().get(Calendar.DAY_OF_MONTH)
+                )
+                findNavController().navigate(
+                    CalendarFragmentDirections.actionCalendarFragmentToRentalRequestFragment(
+                        args.deviceID,
+                        startDay.toString(),
+                        endDay.toString(),
+                    )
+                )
+            } else {
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(
+                    binding.root,
+                    errorColor,
+                    getString(R.string.select_dates_error_messsage_text)
+                )
+            }
         }
     }
 
     private fun setupDisableDates(activeRentsOnDevice: List<ActiveRent>) {
         val disableDates = mutableListOf<Calendar>()
-        Log.i("DisableddatessetupDisableDates", activeRentsOnDevice.toString())
         for (activeRent in activeRentsOnDevice) {
             for (activeRentDate in activeRent.startDate..activeRent.endDate) {
                 val calendar: Calendar = Calendar.getInstance()
                 calendar.set(
                     activeRentDate.year,
-                    activeRentDate.monthValue,
+                    activeRentDate.monthValue - 1,
                     activeRentDate.dayOfMonth
                 )
                 disableDates.add(calendar)

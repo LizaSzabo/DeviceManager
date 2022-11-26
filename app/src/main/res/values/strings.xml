@@ -43,4 +43,5 @@
     <string name="save_button_text">Add</string>
     <string name="delete_button">Delete button</string>
     <string name="no_rental_requests_text">No requests</string>
+    <string name="select_dates_error_messsage_text">You must select the dates first!</string>
 </resources>
