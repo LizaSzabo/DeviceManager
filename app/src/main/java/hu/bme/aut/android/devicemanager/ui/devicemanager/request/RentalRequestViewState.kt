@@ -10,4 +10,4 @@ object DataLoading : RentalRequestViewState()
 
 class DataReady(val device: Device) : RentalRequestViewState()
 
-object DataLoadingFailed : RentalRequestViewState()
+class DataLoadingFailed(val errorMessage: String) : RentalRequestViewState()

@@ -74,11 +74,11 @@ class RentalRequestFragment :
     private fun setupData(device: Device) {
         /*
         val startDate =  device.calendar?.activeRents?.firstOrNull{ it.userId == currentUser.id }?.startDate
-        val endDate = device.calendar?.activeRents?.firstOrNull { it.userId == currentUser.id }?.endDate
+        val endDate = device.calendar?.activeRents?.firstOrNull { it.userId == currentUser.id }?.endDate*/
         binding.deviceName.text = device.name
         binding.deviceState.text = device.state.toString()
         binding.userName.text = currentUser.userName
-        if(startDate != null && endDate != null){
+        /*if(startDate != null && endDate != null){
             binding.rentalInterval.text = "$startDate -- $endDate"
         }*/
     }
