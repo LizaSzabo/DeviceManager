@@ -50,7 +50,7 @@ class RequestListAdapter :
         holder.rentalRequest = rentalRequest
         holder.tvDeviceName.text = rentalRequest.deviceName
 
-        when (rentalRequest.status) {
+        when (rentalRequest.state) {
             RentalRequestStatus.Accepted -> {
                 holder.itemCard.setBackgroundResource(R.drawable.card_view_background_dark)
             }

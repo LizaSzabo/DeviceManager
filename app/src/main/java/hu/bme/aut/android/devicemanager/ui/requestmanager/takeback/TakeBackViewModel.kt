@@ -18,7 +18,7 @@ class TakeBackViewModel @Inject constructor(
         if (device?.qrCode == qrCode) {
             val rentalRequest = mockRentalRequestData.firstOrNull { it.id == requestId }
             val index = mockRentalRequestData.indexOf(rentalRequest)
-            val closedRentalRequest = rentalRequest?.copy(status = RentalRequestStatus.Closed)
+            val closedRentalRequest = rentalRequest?.copy(state = RentalRequestStatus.Closed)
             if (closedRentalRequest != null) {
                 mockRentalRequestData[index] = closedRentalRequest
             }

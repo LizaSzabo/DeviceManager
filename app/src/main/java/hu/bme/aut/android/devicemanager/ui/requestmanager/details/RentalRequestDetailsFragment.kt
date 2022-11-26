@@ -84,14 +84,16 @@ class RentalRequestDetailsFragment :
     }
 
     private fun showRequestData(rentalRequest: RentalRequest) {
-        binding.deviceId.text = ""
+        binding.deviceId.text = rentalRequest.deviceId
         binding.deviceName.text = rentalRequest.deviceName
-        binding.userName.text = rentalRequest.user?.userName
-        binding.requestId.text = rentalRequest.id.toString()
-        binding.rentalRequestStatus.text = rentalRequest.status.toString()
-
-        //TODO: delete mock data
-        binding.rentalInterval.text = "2022.10.23 - 2022.12.18."
+        binding.userName.text = rentalRequest.username
+        binding.requestId.text = rentalRequest.id
+        binding.rentalRequestStatus.text = rentalRequest.state.toString()
+        binding.rentalInterval.text = buildString {
+            append(rentalRequest.from)
+            append(" -- ")
+            append(rentalRequest.to)
+        }
     }
 
     private fun setupAcceptButton() {

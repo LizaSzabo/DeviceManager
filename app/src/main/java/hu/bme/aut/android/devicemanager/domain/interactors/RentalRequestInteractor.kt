@@ -3,6 +3,7 @@ package hu.bme.aut.android.devicemanager.domain.interactors
 import hu.bme.aut.android.devicemanager.data.network.model.RentalNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.source.RentalNetworkDataSource
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
+import hu.bme.aut.android.devicemanager.domain.model.RentalRequestStatus
 import hu.bme.aut.android.devicemanager.util.NetworkError
 import hu.bme.aut.android.devicemanager.util.NetworkResponse
 import hu.bme.aut.android.devicemanager.util.NetworkResult
@@ -40,10 +41,46 @@ class RentalRequestInteractor @Inject constructor(
                     getRentalRequestsResponse.result.map {
                         RentalRequest(
                             id = it.id,
-                            deviceName = it.deviceName
+                            deviceName = it.deviceName,
+                            state = when (it.state) {
+                                "ACTIVE" -> RentalRequestStatus.Active
+                                "ACCEPTED" -> RentalRequestStatus.Accepted
+                                "CLOSED" -> RentalRequestStatus.Closed
+                                else -> RentalRequestStatus.Active
+                            },
                         )
                     }
                 NetworkResult(rentalRequests)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
+    suspend fun getRentalRequest(rentalRequestId: String): NetworkResponse<RentalRequest> {
+        return when (val getRentalRequestResponse =
+            rentalNetworkDataSource.getRentalRequest(rentalRequestId)) {
+            is NetworkError -> {
+                NetworkError(getRentalRequestResponse.errorMessage)
+            }
+            is NetworkResult -> {
+                val rentalRequest = RentalRequest(
+                    id = getRentalRequestResponse.result.id,
+                    deviceId = getRentalRequestResponse.result.deviceId,
+                    deviceName = getRentalRequestResponse.result.deviceName,
+                    username = getRentalRequestResponse.result.username,
+                    from = getRentalRequestResponse.result.from,
+                    to = getRentalRequestResponse.result.to,
+                    state = when (getRentalRequestResponse.result.state) {
+                        "ACTIVE" -> RentalRequestStatus.Active
+                        "ACCEPTED" -> RentalRequestStatus.Accepted
+                        "CLOSED" -> RentalRequestStatus.Closed
+                        else -> RentalRequestStatus.Active
+                    },
+                    closeComment = getRentalRequestResponse.result.closeComment,
+                    acceptComment = getRentalRequestResponse.result.acceptComment,
+                )
+
+                NetworkResult(rentalRequest)
             }
             UnknownHostError -> NetworkError("UnknownHostError")
         }

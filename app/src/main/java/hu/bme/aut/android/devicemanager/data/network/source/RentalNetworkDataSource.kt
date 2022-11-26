@@ -15,4 +15,8 @@ class RentalNetworkDataSource(
     suspend fun getRentalRequests() = apiCall {
         deviceManagerApi.getRentalRequests(token)
     }
+
+    suspend fun getRentalRequest(rentalRequestId: String) = apiCall {
+        deviceManagerApi.getRentalRequest(token, rentalRequestId)
+    }
 }

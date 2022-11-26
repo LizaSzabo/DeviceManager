@@ -32,16 +32,15 @@
 
     <TextView
         android:id="@+id/requestId"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/dark_orange_text"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/deviceIdLabel"
-        app:layout_constraintStart_toEndOf="@+id/requestIdLabel"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/requestIdLabel"
+        app:layout_constraintTop_toBottomOf="@+id/requestIdLabel"
         tools:text="Request id" />
 
     <TextView
@@ -49,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="36dp"
         android:text="@string/device_id_label_text"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,16 +56,15 @@
 
     <TextView
         android:id="@+id/deviceId"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/dark_orange_text"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/deviceIdLabel"
-        app:layout_constraintStart_toEndOf="@+id/deviceIdLabel"
-        app:layout_constraintTop_toBottomOf="@+id/requestIdLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/deviceIdLabel"
+        app:layout_constraintTop_toBottomOf="@+id/deviceIdLabel"
         tools:text="device id" />
 
     <TextView
@@ -78,20 +76,19 @@
         android:text="@string/device_name_label_text"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deviceIdLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/deviceId" />
 
     <TextView
         android:id="@+id/deviceName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:textColor="@color/dark_orange_text"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/deviceNameLabel"
         app:layout_constraintStart_toEndOf="@+id/deviceNameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/deviceId"
+        app:layout_constraintTop_toTopOf="@+id/deviceNameLabel"
         tools:text="device name" />
 
     <TextView

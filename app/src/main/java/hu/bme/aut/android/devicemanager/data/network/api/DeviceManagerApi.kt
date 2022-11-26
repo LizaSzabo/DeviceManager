@@ -53,4 +53,10 @@ interface DeviceManagerApi {
     suspend fun getRentalRequests(
         @Header("Authorization") token: String,
     ): List<GetRentalRequestResponse>
+
+    @GET("rental/{id}")
+    suspend fun getRentalRequest(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+    ): GetRentalRequestIdResponse
 }
