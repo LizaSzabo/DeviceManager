@@ -1,6 +1,5 @@
 package hu.bme.aut.android.devicemanager.util
 
-import android.util.Log
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
@@ -35,7 +34,8 @@ suspend fun <T : Any> apiCall(block: suspend () -> T): NetworkResponse<T> {
 private fun getErrorMessage(httpException: HttpException): String? {
     val beforeString = "error\":\""
     val afterString = "\",\"path"
-    return httpException.response()?.errorBody()?.string()?.substringAfter(beforeString)?.substringBefore(afterString)
+    return httpException.response()?.errorBody()?.string()?.substringAfter(beforeString)
+        ?.substringBefore(afterString)
 }
 
 

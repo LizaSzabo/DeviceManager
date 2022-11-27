@@ -63,12 +63,12 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
 
     private fun setupToggleButton() {
         binding.switchLoginRoleButton.setOnClickListener {
-            if (!binding.switchLoginRoleButton.isChecked) {
+            userRole = if (!binding.switchLoginRoleButton.isChecked) {
                 viewModel.switchToUserMode()
-                userRole = UserRole.USER
+                UserRole.USER
             } else {
                 viewModel.switchToAdminMode()
-                userRole = UserRole.ADMIN
+                UserRole.ADMIN
             }
         }
     }

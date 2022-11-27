@@ -22,5 +22,4 @@ class TakeBackPresenter @Inject constructor(
             },
             converter = { it }
         )
-
 }

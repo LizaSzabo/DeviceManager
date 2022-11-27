@@ -29,19 +29,7 @@ class DeviceDataSource(
         return calendarDao.getCalendar(calendarId)
     }
 
-    fun deleteAllDevices() {
-        deviceDao.deleteDevices()
-    }
-
-    fun deleteAllCalendars() {
-        calendarDao.deleteCalendars()
-    }
-
     fun saveDeviceIdList(roomListDeviceID: List<RoomListDeviceID>) {
         listDeviceDao.saveDeviceIds(roomListDeviceID)
-    }
-
-    fun getDeviceIdsList(): List<RoomListDeviceID> {
-        return listDeviceDao.getDeviceIds()
     }
 }

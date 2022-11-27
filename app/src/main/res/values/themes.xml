@@ -21,7 +21,7 @@
     </style>
 
     <style name="CalendarWidgetWeekDay">
-        <item name="android:paddingVertical" tools:targetApi="o">8dp</item>
+        <item name="android:paddingVertical" >8dp</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/dark_orange_grey_text</item>
     </style>

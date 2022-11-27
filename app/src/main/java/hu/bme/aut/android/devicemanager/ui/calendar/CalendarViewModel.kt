@@ -17,7 +17,6 @@ class CalendarViewModel @Inject constructor(
 
         viewState = when (val deviceData = calendarPresenter.getActiveRents(deviceId)) {
             is PresentationResult -> {
-                Log.i("getActiveRentals", deviceData.result.toString())
                 DataReady(deviceData.result)
             }
             is PresentationNetworkError -> {
