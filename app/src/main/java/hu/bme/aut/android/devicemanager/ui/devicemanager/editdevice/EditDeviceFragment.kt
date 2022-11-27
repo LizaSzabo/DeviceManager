@@ -22,6 +22,14 @@ class EditDeviceFragment : RainbowCakeDialogFragment<EditDeviceViewState, EditDe
     private lateinit var binding: DialogEditDeviceNameBinding
     private val args: EditDeviceFragmentArgs by navArgs()
 
+    companion object {
+        var editListener: EditListener? = null
+    }
+
+    interface EditListener {
+        fun onSuccessfulEdit()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,12 +59,8 @@ class EditDeviceFragment : RainbowCakeDialogFragment<EditDeviceViewState, EditDe
             }
             EditDeviceSuccess -> {
                 binding.loading.isVisible = false
-                val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
-                showSnackBar(
-                    binding.root,
-                    successColor,
-                    getString(R.string.device_name_edited_successfully_message_text)
-                )
+                editListener?.onSuccessfulEdit()
+                dismiss()
             }
             is EditDeviceError -> {
                 binding.loading.isVisible = false

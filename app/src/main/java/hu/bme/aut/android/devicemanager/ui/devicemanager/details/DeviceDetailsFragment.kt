@@ -1,5 +1,6 @@
 package hu.bme.aut.android.devicemanager.ui.devicemanager.details
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,14 +17,18 @@ import hu.bme.aut.android.devicemanager.databinding.FragmentDeviceDetailsBinding
 import hu.bme.aut.android.devicemanager.domain.model.Calendar
 import hu.bme.aut.android.devicemanager.domain.model.Device
 import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
+import hu.bme.aut.android.devicemanager.ui.devicemanager.editdevice.EditDeviceFragment
+import hu.bme.aut.android.devicemanager.ui.devicemanager.editdevice.EditDeviceFragment.Companion.editListener
 import hu.bme.aut.android.devicemanager.util.UserRole
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class DeviceDetailsFragment :
-    RainbowCakeFragment<DeviceDetailsViewState, DeviceDetailsViewModel>() {
+    RainbowCakeFragment<DeviceDetailsViewState, DeviceDetailsViewModel>(),
+    EditDeviceFragment.EditListener {
 
     private lateinit var binding: FragmentDeviceDetailsBinding
     override fun provideViewModel() = getViewModelFromFactory()
@@ -45,6 +50,7 @@ class DeviceDetailsFragment :
 
         setupUserRole()
         setupRentButton()
+        setupListener()
         viewModel.loadDeviceData(args.deviceID)
     }
 
@@ -136,5 +142,20 @@ class DeviceDetailsFragment :
                 )
             }
         }
+    }
+
+
+    override fun onSuccessfulEdit() {
+        val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
+        showSnackBar(
+            binding.root,
+            successColor,
+            getString(R.string.device_name_edited_successfully_message_text)
+        )
+        viewModel.loadDeviceData(args.deviceID)
+    }
+
+    private fun setupListener() {
+        editListener = this
     }
 }
