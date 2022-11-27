@@ -71,10 +71,9 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
     }
 
     fun addAllDevices(device: List<Device>) {
-        devices -= devices
-        devices += device
-        submitList(devices)
-        notifyDataSetChanged()
+        devices = devices.filter { it !in devices }
+        devices = devices + device
+        submitList(device)
     }
 
     companion object {

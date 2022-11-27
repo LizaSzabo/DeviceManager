@@ -16,12 +16,14 @@ import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
 import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentDevicesListBinding
 import hu.bme.aut.android.devicemanager.domain.model.Device
+import hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogFragment
+import hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogFragment.Companion.addDeviceListener
 import hu.bme.aut.android.devicemanager.util.UserRole
 import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
 class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesListViewModel>(),
-    DevicesListAdapter.DeviceItemClickListener {
+    DevicesListAdapter.DeviceItemClickListener, AddDeviceDialogFragment.AddDeviceListener {
 
     private lateinit var binding: FragmentDevicesListBinding
     override fun provideViewModel() = getViewModelFromFactory()
@@ -44,6 +46,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         setupRecyclerView()
         setupFloatingActionButtonVisibility()
         setupFloatingActionButton()
+        setupListener()
         viewModel.loadDevices()
     }
 
@@ -141,5 +144,20 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
 
     private fun refreshList() {
         viewModel.loadDevices()
+    }
+
+
+    override fun onSuccessfulAddDevice() {
+        val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
+        showSnackBar(
+            binding.root,
+            successColor,
+            getString(R.string.device_name_edited_successfully_message_text)
+        )
+        refreshList()
+    }
+
+    private fun setupListener() {
+        addDeviceListener = this
     }
 }

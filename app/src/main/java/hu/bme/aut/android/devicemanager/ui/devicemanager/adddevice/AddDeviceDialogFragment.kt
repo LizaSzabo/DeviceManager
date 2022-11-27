@@ -20,6 +20,15 @@ class AddDeviceDialogFragment :
     private lateinit var binding: DialogAddNewDeviceBinding
     override fun provideViewModel() = getViewModelFromFactory()
 
+    companion object {
+        var addDeviceListener: AddDeviceListener? = null
+    }
+
+    interface AddDeviceListener {
+        fun onSuccessfulAddDevice()
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,12 +61,14 @@ class AddDeviceDialogFragment :
             }
             is SaveNewDeviceSuccess -> {
                 binding.loading.isVisible = false
-                val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
-                showSnackBar(
-                    binding.root,
-                    successColor,
-                    getString(R.string.device_added_successfully_message_text)
-                )
+                addDeviceListener?.onSuccessfulAddDevice()
+                dismiss()
+                /* val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
+                 showSnackBar(
+                     binding.root,
+                     successColor,
+                     getString(R.string.device_added_successfully_message_text)
+                 )*/
             }
         }
     }
