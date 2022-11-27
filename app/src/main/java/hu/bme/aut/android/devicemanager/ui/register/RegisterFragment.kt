@@ -70,7 +70,7 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
     private fun formIsValid(): Boolean {
         var error = false
         if (binding.userNameInput.text.isEmpty()) {
-            binding.userNameInput.error = "User name cannot be empty!"
+            binding.userNameInput.error = "USER name cannot be empty!"
             error = true
         }
         if (binding.passwordInput.text.isEmpty()) {

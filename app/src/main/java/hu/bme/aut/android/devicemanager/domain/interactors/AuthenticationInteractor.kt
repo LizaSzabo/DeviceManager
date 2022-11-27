@@ -1,7 +1,9 @@
 package hu.bme.aut.android.devicemanager.domain.interactors
 
+import com.auth0.android.jwt.JWT
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.currentUser
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.token
+import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.userRole
 import hu.bme.aut.android.devicemanager.data.network.model.LoginNetworkRequest
 import hu.bme.aut.android.devicemanager.data.network.model.SignUpRequest
 import hu.bme.aut.android.devicemanager.data.network.source.LoginNetworkDataSource
@@ -13,17 +15,17 @@ class AuthenticationInteractor @Inject constructor(
     private val loginNetworkDataSource: LoginNetworkDataSource
 ) {
 
-    suspend fun createUser(userName: String, password: String): NetworkResponse<Unit> {
+    suspend fun createUser(userName: String, password: String): NetworkResponse<Boolean> {
         val signUpRequest = SignUpRequest(userName, password)
         return when (val createUserResponse =
             loginNetworkDataSource.createUser(signUpRequest)) {
             is NetworkResult -> {
-                NetworkResult(Unit)
+                NetworkResult(true)
             }
             is NetworkError -> {
                 NetworkError(createUserResponse.errorMessage)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -35,10 +37,16 @@ class AuthenticationInteractor @Inject constructor(
             }
             is NetworkResult -> {
                 token = loginResponse.result.token
-                currentUser = User(userName = userName, password = password, id = token)
-                NetworkResult(loginResponse.result)
+                val jwt = JWT(token)
+                val role: String? = jwt.getClaim("role").asString()
+                if (role != userRole.name && userRole == UserRole.ADMIN) {
+                    NetworkError("Not an admin user!")
+                } else {
+                    currentUser = User(userName = userName, password = password, id = token)
+                    NetworkResult(loginResponse.result)
+                }
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -53,7 +61,7 @@ class AuthenticationInteractor @Inject constructor(
             is NetworkNoResult -> {
                 NetworkResult(Unit)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
             is NetworkResult -> {
                 NetworkResult(Unit)
             }

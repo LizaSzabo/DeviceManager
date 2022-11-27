@@ -3,7 +3,7 @@ package hu.bme.aut.android.devicemanager.ui.devicemanager.list
 import hu.bme.aut.android.devicemanager.domain.model.Device
 
 
-sealed class DevicesListViewState()
+sealed class DevicesListViewState
 
 object Initial : DevicesListViewState()
 

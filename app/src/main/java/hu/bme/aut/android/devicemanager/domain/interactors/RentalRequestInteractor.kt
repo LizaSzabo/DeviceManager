@@ -26,7 +26,7 @@ class RentalRequestInteractor @Inject constructor(
             is NetworkError -> {
                 NetworkError(saveRentalRequestResponse.errorMessage)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
             is NetworkResult -> {
                 NetworkResult(saveRentalRequestResponse.result.id)
             }
@@ -54,7 +54,7 @@ class RentalRequestInteractor @Inject constructor(
                     }
                 NetworkResult(rentalRequests)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -84,7 +84,7 @@ class RentalRequestInteractor @Inject constructor(
 
                 NetworkResult(rentalRequest)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -102,7 +102,7 @@ class RentalRequestInteractor @Inject constructor(
             is NetworkError -> {
                 NetworkError(rentalRequestAcceptResponse.errorMessage)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -120,7 +120,7 @@ class RentalRequestInteractor @Inject constructor(
             is NetworkError -> {
                 NetworkError(rentalRequestTakeBackResponse.errorMessage)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 }

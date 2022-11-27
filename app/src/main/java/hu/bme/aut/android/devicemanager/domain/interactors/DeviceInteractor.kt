@@ -32,7 +32,7 @@ class DeviceInteractor @Inject constructor(
                 val devices = getDevicesResponse.result.map { Device(id = it.id, name = it.name) }
                 NetworkResult(devices)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -44,7 +44,7 @@ class DeviceInteractor @Inject constructor(
             is NetworkNoResult -> {
                 NetworkResult("success")
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
             is NetworkResult -> {
                 NetworkResult("success")
             }
@@ -123,7 +123,7 @@ class DeviceInteractor @Inject constructor(
 
                 NetworkResult(device)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -166,7 +166,7 @@ class DeviceInteractor @Inject constructor(
 
                 NetworkResult(device)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -179,7 +179,7 @@ class DeviceInteractor @Inject constructor(
             is NetworkResult -> {
                 NetworkResult(deleteDeviceResponse.result.isSuccessful)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -197,7 +197,7 @@ class DeviceInteractor @Inject constructor(
                 NetworkResult(activeRentsList)
             }
             is NetworkError -> NetworkError(device.errorMessage)
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 
@@ -211,7 +211,7 @@ class DeviceInteractor @Inject constructor(
             is NetworkError -> {
                 NetworkError(editDevicesResponse.errorMessage)
             }
-            UnknownHostError -> NetworkError("UnknownHostError")
+            UnknownHostError -> NetworkError("NoNetworkError")
         }
     }
 

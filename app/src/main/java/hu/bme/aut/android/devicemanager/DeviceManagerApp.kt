@@ -15,7 +15,7 @@ import timber.log.Timber
 class DeviceManagerApp : Application() {
 
     companion object {
-        var userRole = UserRole.User
+        var userRole = UserRole.USER
         lateinit var currentUser: User
         var token = ""
     }

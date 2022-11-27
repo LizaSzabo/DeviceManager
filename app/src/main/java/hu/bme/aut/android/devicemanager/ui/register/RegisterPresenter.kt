@@ -9,7 +9,7 @@ class RegisterPresenter @Inject constructor(
     private val authenticationInteractor: AuthenticationInteractor
 ) {
 
-    suspend fun createUser(userName: String, password: String): PresentationResponse<Unit> =
+    suspend fun createUser(userName: String, password: String): PresentationResponse<Boolean> =
         makeNetworkCall(
             interactor = { authenticationInteractor.createUser(userName, password) },
             converter = { it }

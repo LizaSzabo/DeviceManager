@@ -114,7 +114,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
     }
 
     private fun setupFloatingActionButtonVisibility() {
-        binding.fab.isVisible = userRole != UserRole.User
+        binding.fab.isVisible = userRole != UserRole.USER
     }
 
     private fun setupFloatingActionButton() {

@@ -42,7 +42,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
     private fun setupLoginButton() {
         binding.loginButton.setOnClickListener {
             if (binding.switchLoginRoleButton.isChecked) {
-                userRole = UserRole.Admin
+                userRole = UserRole.ADMIN
                 if (!isInputError()) {
                     viewModel.loginAdmin(
                         binding.userNameInput.text.toString(),
@@ -50,7 +50,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
                     )
                 }
             } else {
-                userRole = UserRole.User
+                userRole = UserRole.USER
                 if (!isInputError()) {
                     viewModel.loginUser(
                         binding.userNameInput.text.toString(),
@@ -65,8 +65,10 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
         binding.switchLoginRoleButton.setOnClickListener {
             if (!binding.switchLoginRoleButton.isChecked) {
                 viewModel.switchToUserMode()
+                userRole = UserRole.USER
             } else {
                 viewModel.switchToAdminMode()
+                userRole = UserRole.ADMIN
             }
         }
     }
@@ -111,7 +113,7 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
     private fun isInputError(): Boolean {
         var error = false
         if (binding.userNameInput.text.isEmpty()) {
-            binding.userNameInput.error = "User name cannot be empty!"
+            binding.userNameInput.error = "USER name cannot be empty!"
             error = true
         }
         if (binding.passwordInput.text.isEmpty()) {

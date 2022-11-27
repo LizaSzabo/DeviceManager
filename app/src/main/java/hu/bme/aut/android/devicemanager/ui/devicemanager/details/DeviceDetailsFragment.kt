@@ -92,7 +92,7 @@ class DeviceDetailsFragment :
     }
 
     private fun setupUserRole() {
-        binding.buttonEdit.isVisible = userRole == UserRole.Admin
+        binding.buttonEdit.isVisible = userRole == UserRole.ADMIN
     }
 
     private fun setupRentButton() {

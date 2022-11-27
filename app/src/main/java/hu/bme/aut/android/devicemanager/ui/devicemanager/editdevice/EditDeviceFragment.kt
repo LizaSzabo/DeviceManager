@@ -57,7 +57,6 @@ class EditDeviceFragment : RainbowCakeDialogFragment<EditDeviceViewState, EditDe
                     successColor,
                     getString(R.string.device_name_edited_successfully_message_text)
                 )
-                dismiss()
             }
             is EditDeviceError -> {
                 binding.loading.isVisible = false

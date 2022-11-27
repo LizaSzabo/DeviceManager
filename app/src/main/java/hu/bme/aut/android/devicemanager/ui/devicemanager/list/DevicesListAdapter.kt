@@ -63,7 +63,7 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
             holder.itemCard.setBackgroundResource(R.drawable.card_view_background_light)
         }
 
-        holder.deleteIcon.isVisible = userRole != UserRole.User
+        holder.deleteIcon.isVisible = userRole != UserRole.USER
     }
 
     override fun getItemCount(): Int {
