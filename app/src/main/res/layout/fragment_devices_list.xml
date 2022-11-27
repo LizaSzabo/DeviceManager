@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogout"
         tools:listitem="@layout/item_device" />
 
     <androidx.core.widget.ContentLoadingProgressBar
@@ -34,12 +34,12 @@
         android:id="@+id/noDevicesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:padding="4dp"
+        android:text="@string/no_devices_text"
         android:textColor="@color/dark_orange_grey_text"
         android:textSize="22sp"
-        android:layout_gravity="center"
         android:visibility="visible"
-        android:text="@string/no_devices_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,22 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/add_new_device_as_administrator_button_description"
         android:src="@drawable/ic_baseline_add_circle_24"
-        android:contentDescription="@string/add_new_device_as_administrator_button_description" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:padding="12sp"
+        android:text="@string/logout_button_text"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

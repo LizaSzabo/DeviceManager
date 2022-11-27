@@ -32,7 +32,7 @@ class StartMenuFragment : RainbowCakeFragment<StartMenuViewState, StartMenuViewM
     }
 
     override fun render(viewState: StartMenuViewState) {
-        //TODO("Not yet implemented")
+        //
     }
 
     private fun setupButtons() {
@@ -44,6 +44,9 @@ class StartMenuFragment : RainbowCakeFragment<StartMenuViewState, StartMenuViewM
         }
         binding.buttonRegisterAdmin.setOnClickListener {
             findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToCreateAdminFragment())
+        }
+        binding.buttonLogout.setOnClickListener {
+            findNavController().navigate(StartMenuFragmentDirections.actionStartMenuFragmentToLoginFragment())
         }
     }
 }

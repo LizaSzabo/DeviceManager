@@ -47,6 +47,8 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
         setupFloatingActionButtonVisibility()
         setupFloatingActionButton()
         setupListener()
+        setupLogoutVisibility()
+        setupLogoutButton()
         viewModel.loadDevices()
     }
 
@@ -55,14 +57,17 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
             is Initial -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
+                binding.buttonLogout.isEnabled = false
             }
             is Loading -> {
                 binding.loading.isVisible = true
                 binding.noDevicesText.isVisible = false
+                binding.buttonLogout.isEnabled = false
             }
             is DataReady -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
+                binding.buttonLogout.isEnabled = true
                 devicesListAdapter.addAllDevices(viewState.devices)
                 if (viewState.devices.isEmpty()) {
                     binding.noDevicesText.isVisible = true
@@ -70,6 +75,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
             }
             is LoadingError -> {
                 binding.loading.isVisible = false
+                binding.buttonLogout.isEnabled = true
                 binding.noDevicesText.isVisible = false
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
@@ -77,12 +83,14 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
             is DeleteError -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
+                binding.buttonLogout.isEnabled = true
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
             }
             DeleteSuccess -> {
                 binding.loading.isVisible = false
                 binding.noDevicesText.isVisible = false
+                binding.buttonLogout.isEnabled = true
                 val errorColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
                 showSnackBar(binding.root, errorColor, "Successfully deleted!")
                 refreshList()
@@ -159,5 +167,19 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
 
     private fun setupListener() {
         addDeviceListener = this
+    }
+
+    private fun setupLogoutVisibility() {
+        if (userRole == UserRole.USER) {
+            binding.buttonLogout.visibility = View.VISIBLE
+        } else {
+            binding.buttonLogout.visibility = View.GONE
+        }
+    }
+
+    private fun setupLogoutButton() {
+        binding.buttonLogout.setOnClickListener {
+            findNavController().navigate(DevicesListFragmentDirections.actionDevicesListFragmentToLoginFragment())
+        }
     }
 }
