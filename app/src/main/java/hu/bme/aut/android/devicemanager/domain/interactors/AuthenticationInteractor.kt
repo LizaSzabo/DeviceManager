@@ -17,16 +17,13 @@ class AuthenticationInteractor @Inject constructor(
         val signUpRequest = SignUpRequest(userName, password)
         return when (val createUserResponse =
             loginNetworkDataSource.createUser(signUpRequest)) {
-            is NetworkError -> {
-                NetworkError(createUserResponse.errorMessage)
-            }
-            is NetworkNoResult -> {
-                NetworkResult(Unit)
-            }
-            UnknownHostError -> NetworkError("UnknownHostError")
             is NetworkResult -> {
                 NetworkResult(Unit)
             }
+            is NetworkError -> {
+                NetworkError(createUserResponse.errorMessage)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
         }
     }
 

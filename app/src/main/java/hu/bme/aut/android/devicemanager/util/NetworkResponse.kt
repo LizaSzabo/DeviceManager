@@ -33,6 +33,9 @@ suspend fun <T : Any> apiCall(block: suspend () -> T): NetworkResponse<T> {
 }
 
 private fun getErrorMessage(httpException: HttpException): String? {
-    return httpException.response()?.errorBody()?.string()
+    val beforeString = "error\":\""
+    val afterString = "\",\"path"
+    return httpException.response()?.errorBody()?.string()?.substringAfter(beforeString)?.substringBefore(afterString)
 }
+
 
