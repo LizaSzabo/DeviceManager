@@ -111,7 +111,8 @@
     <fragment
         android:id="@+id/rentalRequestFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.request.RentalRequestFragment"
-        android:label="RentalRequestFragment">
+        android:label="RentalRequestFragment"
+        app:popUpTo="@id/deviceDetailsFragment">
         <argument
             android:name="deviceID"
             app:argType="string" />

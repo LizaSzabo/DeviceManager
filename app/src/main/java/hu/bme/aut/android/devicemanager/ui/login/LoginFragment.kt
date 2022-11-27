@@ -85,25 +85,37 @@ class LoginFragment : RainbowCakeFragment<LoginViewState, LoginViewModel>() {
                 binding.textViewAdmin.isVisible = false
                 binding.registrationLink.isVisible = true
                 binding.loading.isVisible = false
+                binding.loginButton.isEnabled = true
+                binding.switchLoginRoleButton.isEnabled = true
             }
             is InitialAdmin -> {
                 binding.textViewAdmin.isVisible = true
                 binding.registrationLink.isVisible = false
                 binding.loading.isVisible = false
+                binding.loginButton.isEnabled = true
+                binding.switchLoginRoleButton.isEnabled = true
             }
             is Loading -> {
                 binding.loading.isVisible = true
+                binding.loginButton.isEnabled = false
+                binding.switchLoginRoleButton.isEnabled = false
             }
             is LoginSuccessWithUser -> {
                 binding.loading.isVisible = false
+                binding.loginButton.isEnabled = true
+                binding.switchLoginRoleButton.isEnabled = true
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDevicesListFragment())
             }
             is LoginSuccessWithAdmin -> {
                 binding.loading.isVisible = false
+                binding.loginButton.isEnabled = true
+                binding.switchLoginRoleButton.isEnabled = true
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToStartMenuFragment())
             }
             is LoginFail -> {
                 binding.loading.isVisible = false
+                binding.loginButton.isEnabled = true
+                binding.switchLoginRoleButton.isEnabled = true
                 val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
                 showSnackBar(binding.root, errorColor, viewState.message)
             }
