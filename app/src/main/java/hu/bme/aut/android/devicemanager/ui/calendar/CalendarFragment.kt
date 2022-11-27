@@ -44,31 +44,6 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         super.onViewCreated(view, savedInstanceState)
 
         setupCalendar()
-        /*  val activeRentOnDevice = device?.calendar?.activeRents
-          val disableDates = mutableListOf<Calendar>()
-
-          Log.i("activeRentOnDevice", activeRentOnDevice.toString())
-
-          if (activeRentOnDevice != null) {
-              for (activeRent in activeRentOnDevice) {
-                  if (activeRent.startDate != null && activeRent.endDate != null) {
-                      for (activeRentDate in activeRent.startDate..activeRent.endDate) {
-                          val calendar: Calendar = Calendar.getInstance()
-                          calendar.set(
-                              activeRentDate.year,
-                              activeRentDate.monthValue,
-                              activeRentDate.dayOfMonth
-                          )
-                          disableDates.add(calendar)
-                      }
-                  }
-              }
-          }
-          Log.i("activeRentOnDeviceDisabledDates", disableDates.size.toString())
-          binding.calendarView.setDisabledDays(disableDates)*/
-
-        /* binding.calendarView.setDateSelected(CalendarDay.today(), true)*/
-
         viewModel.getActiveRents(args.deviceID)
         setupSelectButton()
     }
@@ -93,11 +68,12 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
+
     private fun setupCalendar() {
         binding.calendarView.setHeaderColor(R.color.main_variant_orange)
         binding.calendarView.setHeaderLabelColor(R.color.white)
-        binding.calendarView.setAllowClickWhenDisabled(false)
+        if (Build.VERSION.SDK_INT >= 31)
+            binding.calendarView.setAllowClickWhenDisabled(false)
         binding.calendarView.setCalendarDayLayout(R.layout.layout_calendar_day)
     }
 
