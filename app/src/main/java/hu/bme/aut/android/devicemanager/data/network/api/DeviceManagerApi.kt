@@ -73,4 +73,11 @@ interface DeviceManagerApi {
         @Path("id") id: String,
         @Body rentalTakeBackRequest: RentalTakeBackRequest,
     ): RentalRequestStatusChangeResponse
+
+    @PUT("device/{id}")
+    suspend fun editDevice(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body editDeviceRequest: EditDeviceRequest,
+    ): EditDeviceResponse
 }

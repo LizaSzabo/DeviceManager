@@ -1,10 +1,9 @@
 package hu.bme.aut.android.devicemanager.data.network.source
 
-import android.util.Log
 import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.token
 import hu.bme.aut.android.devicemanager.data.network.api.DeviceManagerApi
 import hu.bme.aut.android.devicemanager.data.network.model.AddDeviceRequest
-import hu.bme.aut.android.devicemanager.data.network.model.RentalNetworkRequest
+import hu.bme.aut.android.devicemanager.data.network.model.EditDeviceRequest
 import hu.bme.aut.android.devicemanager.util.apiCall
 
 class DeviceNetworkDataSource(
@@ -24,7 +23,11 @@ class DeviceNetworkDataSource(
     }
 
     suspend fun deleteDevice(deviceId: String) = apiCall {
-        Log.i("apiCalldelete", "delete")
         deviceManagerApi.deleteDevice(token, deviceId)
+    }
+
+    suspend fun editDevice(deviceId: String, deviceName: String) = apiCall {
+        val editDeviceRequest = EditDeviceRequest(name = deviceName)
+        deviceManagerApi.editDevice(token, deviceId, editDeviceRequest)
     }
 }

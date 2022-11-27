@@ -14,7 +14,7 @@ import hu.bme.aut.android.devicemanager.databinding.DialogAddNewDeviceBinding
 import hu.bme.aut.android.devicemanager.util.showSnackBar
 
 @AndroidEntryPoint
-class AddDeviceDialogfragment :
+class AddDeviceDialogFragment :
     RainbowCakeDialogFragment<AddDeviceViewState, AddDeviceViewModel>() {
 
     private lateinit var binding: DialogAddNewDeviceBinding
@@ -60,7 +60,8 @@ class AddDeviceDialogfragment :
     private fun setupSaveButton() {
         binding.btnSave.setOnClickListener {
             if (binding.editTextDeviceName.text?.isEmpty() == true) {
-                binding.etDeviceName.error = "User name cannot be empty!"
+                binding.etDeviceName.error =
+                    getString(R.string.device_name_empty_error_message_text)
             } else {
                 viewModel.addNewDevice(binding.editTextDeviceName.text.toString())
             }

@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_deviceDetailsFragment_to_rentalRequestFragment"
             app:destination="@id/rentalRequestFragment" />
+        <action
+            android:id="@+id/action_deviceDetailsFragment_to_editDeviceFragment"
+            app:destination="@id/editDeviceFragment" />
     </fragment>
     <fragment
         android:id="@+id/startMenuFragment"
@@ -124,6 +127,17 @@
     </fragment>
     <dialog
         android:id="@+id/addDeviceDialogfragment"
-        android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogfragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogFragment"
         android:label="AddDeviceDialogfragment" />
+    <dialog
+        android:id="@+id/editDeviceFragment"
+        android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.editdevice.EditDeviceFragment"
+        android:label="EditDeviceFragment">
+        <argument
+            android:name="deviceID"
+            app:argType="string" />
+        <argument
+            android:name="deviceName"
+            app:argType="string" />
+    </dialog>
 </navigation>

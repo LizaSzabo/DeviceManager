@@ -127,7 +127,7 @@ class DeviceInteractor @Inject constructor(
         }
     }
 
-    private suspend fun getDeviceFromNetwork(deviceId: String): NetworkResponse<Device> {
+    suspend fun getDeviceFromNetwork(deviceId: String): NetworkResponse<Device> {
         return when (val getDeviceResponse = deviceNetworkDataSource.getDevice(deviceId)) {
             is NetworkError -> {
                 NetworkError(getDeviceResponse.errorMessage)
@@ -200,6 +200,21 @@ class DeviceInteractor @Inject constructor(
             UnknownHostError -> NetworkError("UnknownHostError")
         }
     }
+
+
+    suspend fun editDevice(deviceId: String, deviceName: String): NetworkResponse<Boolean> {
+        return when (val editDevicesResponse =
+            deviceNetworkDataSource.editDevice(deviceId, deviceName)) {
+            is NetworkResult -> {
+                NetworkResult(true)
+            }
+            is NetworkError -> {
+                NetworkError(editDevicesResponse.errorMessage)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
 
     private fun String.toLocalDate(): LocalDate {
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")

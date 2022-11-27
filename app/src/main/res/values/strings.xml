@@ -49,4 +49,8 @@
     <string name="no_matching_qr_code_error_message_text">The scanned code is not of this device</string>
     <string name="rental_request_successfully_closed_message_text">Rental request successfully closed</string>
     <string name="qr_code_not_found_message">Qr code not found</string>
+    <string name="edit_device_name_dialog_title_text">Edit device name</string>
+    <string name="device_name_empty_error_message_text">Device name cannot be empty!</string>
+    <string name="device_name_edited_successfully_message_text">Device name edited successfully</string>
+    <string name="edit_button_text">Edit</string>
 </resources>

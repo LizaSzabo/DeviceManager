@@ -29,6 +29,5 @@ class AddDeviceViewModel @Inject constructor(
                 SaveNewDeviceSuccess
             }
         }
-
     }
 }

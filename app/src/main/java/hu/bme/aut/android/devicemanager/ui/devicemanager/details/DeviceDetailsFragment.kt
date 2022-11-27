@@ -52,21 +52,25 @@ class DeviceDetailsFragment :
         when (viewState) {
             is Initial -> {
                 binding.buttonRent.isEnabled = false
+                binding.buttonEdit.isEnabled = false
                 binding.loading.isVisible = false
             }
             is DataLoading -> {
                 binding.buttonRent.isEnabled = false
+                binding.buttonEdit.isEnabled = false
                 binding.loading.isVisible = true
             }
             is DeviceDataReady -> {
                 binding.buttonRent.isEnabled = true
+                binding.buttonEdit.isEnabled = true
                 binding.loading.isVisible = false
-
+                setupEditButton(viewState.device)
                 showDeviceData(viewState.device)
             }
             is DeviceDataLoadingFailure -> {
                 binding.buttonRent.isEnabled = false
                 binding.loading.isVisible = false
+                binding.buttonEdit.isEnabled = false
             }
         }
     }
@@ -88,13 +92,7 @@ class DeviceDetailsFragment :
     }
 
     private fun setupUserRole() {
-        if (userRole == UserRole.Admin) {
-            binding.buttonEdit.isVisible = true
-            binding.buttonDelete.isVisible = true
-        } else {
-            binding.buttonEdit.isVisible = false
-            binding.buttonDelete.isVisible = false
-        }
+        binding.buttonEdit.isVisible = userRole == UserRole.Admin
     }
 
     private fun setupRentButton() {
@@ -125,5 +123,18 @@ class DeviceDetailsFragment :
             }
         }
         return firstAvailableDateString
+    }
+
+    private fun setupEditButton(device: Device) {
+        binding.buttonEdit.setOnClickListener {
+            if (device.id != null) {
+                findNavController().navigate(
+                    DeviceDetailsFragmentDirections.actionDeviceDetailsFragmentToEditDeviceFragment(
+                        device.id,
+                        device.name
+                    )
+                )
+            }
+        }
     }
 }
