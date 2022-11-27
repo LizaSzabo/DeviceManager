@@ -95,6 +95,7 @@ class DevicesListFragment : RainbowCakeFragment<DevicesListViewState, DevicesLis
     }
 
     override fun onItemClick(device: Device) {
+        refreshList()
         device.id?.let {
             findNavController().navigate(
                 DevicesListFragmentDirections.actionDevicesListFragmentToDeviceDetailsFragment(
