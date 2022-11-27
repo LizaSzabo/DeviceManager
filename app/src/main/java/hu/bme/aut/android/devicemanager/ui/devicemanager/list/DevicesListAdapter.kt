@@ -81,12 +81,12 @@ class DevicesListAdapter : ListAdapter<Device, DevicesListAdapter.DeviceViewHold
 
         object ItemCallBack : DiffUtil.ItemCallback<Device>() {
             override fun areItemsTheSame(oldItem: Device, newItem: Device): Boolean {
-                return oldItem == newItem
+                return false
             }
 
             @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(oldItem: Device, newItem: Device): Boolean {
-                return oldItem == newItem
+                return false
             }
         }
     }
