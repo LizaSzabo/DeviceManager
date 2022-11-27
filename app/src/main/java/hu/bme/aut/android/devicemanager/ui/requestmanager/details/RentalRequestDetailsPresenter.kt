@@ -14,4 +14,19 @@ class RentalRequestDetailsPresenter @Inject constructor(
             interactor = { rentalRequestInteractor.getRentalRequest(rentalRequestId) },
             converter = { it }
         )
+
+    suspend fun acceptRentalRequest(
+        rentalRequestId: String,
+        comment: String
+    ): PresentationResponse<Boolean> =
+        makeNetworkCall(
+            interactor = {
+                rentalRequestInteractor.acceptRentalRequest(
+                    rentalRequestId = rentalRequestId,
+                    comment = comment,
+                    state = "ACCEPTED"
+                )
+            },
+            converter = { it }
+        )
 }

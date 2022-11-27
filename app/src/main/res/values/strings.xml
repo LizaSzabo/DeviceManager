@@ -43,5 +43,10 @@
     <string name="save_button_text">Add</string>
     <string name="delete_button">Delete button</string>
     <string name="no_rental_requests_text">No requests</string>
-    <string name="select_dates_error_messsage_text">You must select the dates first!</string>
+    <string name="select_dates_error_message_text">You must select the dates first!</string>
+    <string name="comment_label_text">Comment:</string>
+    <string name="rental_request_successfully_accepted_message_text">Rental request successfully accepted</string>
+    <string name="no_matching_qr_code_error_message_text">The scanned code is not of this device</string>
+    <string name="rental_request_successfully_closed_message_text">Rental request successfully closed</string>
+    <string name="qr_code_not_found_message">Qr code not found</string>
 </resources>

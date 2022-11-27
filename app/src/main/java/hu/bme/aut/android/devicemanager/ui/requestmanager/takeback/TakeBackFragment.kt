@@ -1,18 +1,21 @@
 package hu.bme.aut.android.devicemanager.ui.requestmanager.takeback
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import co.zsmb.rainbowcake.base.OneShotEvent
 import co.zsmb.rainbowcake.base.RainbowCakeFragment
 import co.zsmb.rainbowcake.hilt.getViewModelFromFactory
 import com.google.zxing.integration.android.IntentIntegrator
 import dagger.hilt.android.AndroidEntryPoint
+import hu.bme.aut.android.devicemanager.R
 import hu.bme.aut.android.devicemanager.databinding.FragmentTakeBackBinding
+import hu.bme.aut.android.devicemanager.util.showSnackBar
 import org.json.JSONException
 
 @AndroidEntryPoint
@@ -22,7 +25,6 @@ class TakeBackFragment : RainbowCakeFragment<TakeBackViewState, TakeBackViewMode
     private lateinit var qrScanIntegrator: IntentIntegrator
     private val args: TakeBackFragmentArgs by navArgs()
     override fun provideViewModel() = getViewModelFromFactory()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +40,6 @@ class TakeBackFragment : RainbowCakeFragment<TakeBackViewState, TakeBackViewMode
         super.onViewCreated(view, savedInstanceState)
 
         setupScanner()
-
     }
 
     private fun setupScanner() {
@@ -47,30 +48,31 @@ class TakeBackFragment : RainbowCakeFragment<TakeBackViewState, TakeBackViewMode
         qrScanIntegrator.initiateScan()
     }
 
-
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
-            // If QRCode has no data.
             if (result.contents == null) {
-                Toast.makeText(activity, "result not found", Toast.LENGTH_LONG).show()
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(
+                    binding.root,
+                    errorColor,
+                    getString(R.string.qr_code_not_found_message)
+                )
+                findNavController().popBackStack()
             } else {
-                // If QRCode contains data.
                 try {
-                    // Converting the data to json format
                     result.contents
-
-                    // Show values in UI.
-                    /*
-                    binding.name.text = obj.getString("name")
-                    binding.siteName.text = obj.getString("site_name")
-                     */
-                    viewModel.takeBackDevice(result.contents, args.rentalRequestID,args.deviceID)
+                    viewModel.takeBackDevice(
+                        result.contents,
+                        args.rentalRequestID,
+                        args.deviceID,
+                        args.comment
+                    )
                 } catch (e: JSONException) {
                     e.printStackTrace()
-
-                    // Data not in the expected format. So, whole object as toast message.
-                    Toast.makeText(activity, result.contents, Toast.LENGTH_LONG).show()
+                    val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                    showSnackBar(binding.root, errorColor, result.contents)
                 }
             }
         } else {
@@ -83,18 +85,36 @@ class TakeBackFragment : RainbowCakeFragment<TakeBackViewState, TakeBackViewMode
         when (viewState) {
             is Initial -> {}
             is RequestClosedSuccessfully -> {
-                Toast.makeText(activity, "successfully taken back!", Toast.LENGTH_LONG).show()
                 findNavController().popBackStack()
             }
             is NoMatchingQrCode -> {
-                Toast.makeText(
-                    activity,
-                    "The scanned code is not of this device",
-                    Toast.LENGTH_LONG
-                ).show()
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(
+                    binding.root,
+                    errorColor,
+                    getString(R.string.no_matching_qr_code_error_message_text)
+                )
+            }
+            Loading -> {}
+            is RequestCloseError -> {
+                val errorColor = activity?.getColor(R.color.error_color) ?: Color.RED
+                showSnackBar(
+                    binding.root, errorColor, viewState.errorMessage
+                )
             }
         }
     }
 
-
+    override fun onEvent(event: OneShotEvent) {
+        when (event) {
+            TakeBackViewModel.RentalRequestSuccessfullyClosed -> {
+                val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
+                showSnackBar(
+                    binding.root,
+                    successColor,
+                    getString(R.string.rental_request_successfully_closed_message_text)
+                )
+            }
+        }
+    }
 }

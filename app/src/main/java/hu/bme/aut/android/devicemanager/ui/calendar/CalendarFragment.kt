@@ -127,7 +127,7 @@ class CalendarFragment : RainbowCakeFragment<CalendarViewState, CalendarViewMode
                 showSnackBar(
                     binding.root,
                     errorColor,
-                    getString(R.string.select_dates_error_messsage_text)
+                    getString(R.string.select_dates_error_message_text)
                 )
             }
         }

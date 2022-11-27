@@ -59,4 +59,18 @@ interface DeviceManagerApi {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): GetRentalRequestIdResponse
+
+    @PUT("rental/{id}")
+    suspend fun acceptRentalRequest(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body rentalAcceptRequest: RentalAcceptRequest,
+    ): RentalRequestStatusChangeResponse
+
+    @PUT("rental/{id}")
+    suspend fun takeBackRentalRequest(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
+        @Body rentalTakeBackRequest: RentalTakeBackRequest,
+    ): RentalRequestStatusChangeResponse
 }

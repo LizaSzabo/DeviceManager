@@ -1,11 +1,10 @@
 package hu.bme.aut.android.devicemanager.ui.requestmanager.takeback
 
+import co.zsmb.rainbowcake.base.OneShotEvent
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockDeviceData
-import hu.bme.aut.android.devicemanager.DeviceManagerApp.Companion.mockRentalRequestData
-import hu.bme.aut.android.devicemanager.domain.model.DeviceRentalState
-import hu.bme.aut.android.devicemanager.domain.model.RentalRequestStatus
+import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
+import hu.bme.aut.android.devicemanager.util.PresentationResult
 import javax.inject.Inject
 
 @HiltViewModel
@@ -13,23 +12,32 @@ class TakeBackViewModel @Inject constructor(
     private val takeBackPresenter: TakeBackPresenter
 ) : RainbowCakeViewModel<TakeBackViewState>(Initial) {
 
-    fun takeBackDevice(qrCode: String, requestId: String, deviceId: String) {
-        val device = mockDeviceData.firstOrNull { it.id == deviceId }
-        if (device?.qrCode == qrCode) {
-            val rentalRequest = mockRentalRequestData.firstOrNull { it.id == requestId }
-            val index = mockRentalRequestData.indexOf(rentalRequest)
-            val closedRentalRequest = rentalRequest?.copy(state = RentalRequestStatus.Closed)
-            if (closedRentalRequest != null) {
-                mockRentalRequestData[index] = closedRentalRequest
+    fun takeBackDevice(qrCode: String, requestId: String, deviceId: String, comment: String) =
+        execute {
+            if (deviceId == qrCode) {
+                viewState = Loading
+
+                viewState = when (val rentalRequestTakeBackResponse =
+                    takeBackPresenter.takeBackRentalRequest(
+                        rentalRequestId = requestId,
+                        comment = comment
+                    )) {
+                    is PresentationResult -> {
+                        postEvent(RentalRequestSuccessfullyClosed)
+                        RequestClosedSuccessfully
+                    }
+                    is PresentationNetworkError -> {
+                        if (rentalRequestTakeBackResponse.message != null) {
+                            RequestCloseError(rentalRequestTakeBackResponse.message)
+                        } else {
+                            RequestCloseError("Network error!")
+                        }
+                    }
+                }
+            } else {
+                viewState = NoMatchingQrCode
             }
-
-            val indexOfDevice = mockDeviceData.indexOf(device)
-            val returnedDevice = device.copy(state = DeviceRentalState.Available)
-            mockDeviceData[indexOfDevice] = returnedDevice
-
-            viewState = RequestClosedSuccessfully
-        } else {
-            viewState = NoMatchingQrCode
         }
-    }
+
+    object RentalRequestSuccessfullyClosed : OneShotEvent
 }

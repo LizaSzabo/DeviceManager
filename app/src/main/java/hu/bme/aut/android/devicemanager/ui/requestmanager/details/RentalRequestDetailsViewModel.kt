@@ -1,7 +1,9 @@
 package hu.bme.aut.android.devicemanager.ui.requestmanager.details
 
+import co.zsmb.rainbowcake.base.OneShotEvent
 import co.zsmb.rainbowcake.base.RainbowCakeViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequestStatus
 import hu.bme.aut.android.devicemanager.util.PresentationNetworkError
 import hu.bme.aut.android.devicemanager.util.PresentationResult
@@ -41,6 +43,27 @@ class RentalRequestDetailsViewModel @Inject constructor(
         }
     }
 
-    fun acceptRentalRequest() {
+    fun acceptRentalRequest(comment: String, rentalRequest: RentalRequest) = execute {
+        viewState = RentalRequestDataLoading
+
+        viewState = when (val rentalRequestAcceptResponse =
+            rentalRequestPresenter.acceptRentalRequest(
+                rentalRequestId = rentalRequest.id,
+                comment = comment
+            )) {
+            is PresentationResult -> {
+                postEvent(RentalRequestSuccessfullyAccepted)
+                RentalRequestAccepted(rentalRequest)
+            }
+            is PresentationNetworkError -> {
+                if (rentalRequestAcceptResponse.message != null) {
+                    RentalRequestLoadingFailure(rentalRequestAcceptResponse.message)
+                } else {
+                    RentalRequestLoadingFailure("Network error!")
+                }
+            }
+        }
     }
+
+    object RentalRequestSuccessfullyAccepted : OneShotEvent
 }

@@ -90,6 +90,9 @@
         <argument
             android:name="deviceID"
             app:argType="string" />
+        <argument
+            android:name="comment"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"

@@ -6,22 +6,17 @@ import co.zsmb.rainbowcake.config.rainbowCake
 import co.zsmb.rainbowcake.timber.TIMBER
 import co.zsmb.requirektx.bundle.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
-import hu.bme.aut.android.devicemanager.domain.model.*
+import hu.bme.aut.android.devicemanager.domain.model.User
 import hu.bme.aut.android.devicemanager.util.UserRole
 import timber.log.Timber
-import java.time.LocalDate
 
 
 @HiltAndroidApp
 class DeviceManagerApp : Application() {
 
     companion object {
-        val mockDeviceData = mutableListOf<Device>(
-        )
-        val mockRentalRequestData = mutableListOf<RentalRequest>()
         var userRole = UserRole.User
-        lateinit var currentUser : User
-
+        lateinit var currentUser: User
         var token = ""
     }
 

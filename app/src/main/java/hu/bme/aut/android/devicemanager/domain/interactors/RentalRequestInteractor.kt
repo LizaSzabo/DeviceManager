@@ -1,6 +1,8 @@
 package hu.bme.aut.android.devicemanager.domain.interactors
 
+import hu.bme.aut.android.devicemanager.data.network.model.RentalAcceptRequest
 import hu.bme.aut.android.devicemanager.data.network.model.RentalNetworkRequest
+import hu.bme.aut.android.devicemanager.data.network.model.RentalTakeBackRequest
 import hu.bme.aut.android.devicemanager.data.network.source.RentalNetworkDataSource
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequest
 import hu.bme.aut.android.devicemanager.domain.model.RentalRequestStatus
@@ -81,6 +83,42 @@ class RentalRequestInteractor @Inject constructor(
                 )
 
                 NetworkResult(rentalRequest)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
+    suspend fun acceptRentalRequest(rentalRequestId: String, comment: String, state: String):
+            NetworkResponse<Boolean> {
+        val rentalRequestAccept = RentalAcceptRequest(state = state, comment = comment)
+        return when (val rentalRequestAcceptResponse =
+            rentalNetworkDataSource.acceptRentalRequest(
+                rentalRequestId = rentalRequestId,
+                acceptRequest = rentalRequestAccept
+            )) {
+            is NetworkResult -> {
+                NetworkResult(true)
+            }
+            is NetworkError -> {
+                NetworkError(rentalRequestAcceptResponse.errorMessage)
+            }
+            UnknownHostError -> NetworkError("UnknownHostError")
+        }
+    }
+
+    suspend fun takeBackRentalRequest(rentalRequestId: String, comment: String, state: String):
+            NetworkResponse<Boolean> {
+        val rentalTakeBackRequest = RentalTakeBackRequest(state = state, comment = comment)
+        return when (val rentalRequestTakeBackResponse =
+            rentalNetworkDataSource.takeBackRentalRequest(
+                rentalRequestId = rentalRequestId,
+                takeBackRequest = rentalTakeBackRequest,
+            )) {
+            is NetworkResult -> {
+                NetworkResult(true)
+            }
+            is NetworkError -> {
+                NetworkError(rentalRequestTakeBackResponse.errorMessage)
             }
             UnknownHostError -> NetworkError("UnknownHostError")
         }
