@@ -81,7 +81,7 @@ class RegisterFragment : RainbowCakeFragment<RegisterViewState, RegisterViewMode
             binding.passwordRepeatInput.error = "Password cannot be empty!"
             error = true
         }
-        if (binding.passwordRepeatInput.text == binding.passwordInput.text) {
+        if (binding.passwordRepeatInput.text != binding.passwordInput.text) {
             binding.passwordRepeatInput.error = "Passwords are not identical"
             error = true
         }
