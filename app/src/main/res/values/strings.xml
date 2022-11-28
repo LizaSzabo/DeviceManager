@@ -55,4 +55,5 @@
     <string name="edit_button_text">Edit</string>
     <string name="device_added_successfully_message_text">Device added successfully</string>
     <string name="logout_button_text">Logout</string>
+    <string name="admin_success_creation_message_text">Admin created successfully</string>
 </resources>
