@@ -67,19 +67,17 @@ class RequestListAdapter :
         return rentalRequests.size
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun addAllRentalRequests(rentalRequest: List<RentalRequest>) {
         rentalRequests = rentalRequests.filter { it !in rentalRequests }
         rentalRequests = rentalRequests + rentalRequest
         submitList(rentalRequests)
-        notifyDataSetChanged()
     }
 
     companion object {
 
         object ItemCallBack : DiffUtil.ItemCallback<RentalRequest>() {
             override fun areItemsTheSame(oldItem: RentalRequest, newItem: RentalRequest): Boolean {
-                return oldItem == newItem
+                return false
             }
 
             @SuppressLint("DiffUtilEquals")
@@ -87,7 +85,7 @@ class RequestListAdapter :
                 oldItem: RentalRequest,
                 newItem: RentalRequest
             ): Boolean {
-                return oldItem == newItem
+                return false
             }
         }
     }
