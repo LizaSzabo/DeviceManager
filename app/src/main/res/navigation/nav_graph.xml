@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.login.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -20,11 +22,13 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register"/>
     <fragment
         android:id="@+id/devicesListFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.list.DevicesListFragment"
-        android:label="DevicesListFragment">
+        android:label="DevicesListFragment"
+        tools:layout="@layout/fragment_devices_list">
         <action
             android:id="@+id/action_devicesListFragment_to_deviceDetailsFragment"
             app:destination="@id/deviceDetailsFragment" />
@@ -40,7 +44,8 @@
     <fragment
         android:id="@+id/deviceDetailsFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.details.DeviceDetailsFragment"
-        android:label="DeviceDetailsFragment">
+        android:label="DeviceDetailsFragment"
+        tools:layout="@layout/fragment_device_details">
         <argument
             android:name="deviceID"
             app:argType="string" />
@@ -54,7 +59,8 @@
     <fragment
         android:id="@+id/startMenuFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.startmenu.StartMenuFragment"
-        android:label="StartMenuFragment">
+        android:label="StartMenuFragment"
+        tools:layout="@layout/fragment_start_menu">
         <action
             android:id="@+id/action_startMenuFragment_to_devicesListFragment"
             app:destination="@id/devicesListFragment" />
@@ -73,7 +79,8 @@
     <fragment
         android:id="@+id/requestsListFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.list.RequestsListFragment"
-        android:label="RequestsListFragment">
+        android:label="RequestsListFragment"
+        tools:layout="@layout/fragment_requests_list">
         <action
             android:id="@+id/action_requestsListFragment_to_rentalRequestDetailsFragment"
             app:destination="@id/rentalRequestDetailsFragment" />
@@ -81,7 +88,8 @@
     <fragment
         android:id="@+id/rentalRequestDetailsFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.details.RentalRequestDetailsFragment"
-        android:label="RentalRequestDetailsFragment">
+        android:label="RentalRequestDetailsFragment"
+        tools:layout="@layout/fragment_request_details">
         <argument
             android:name="rentalRequestID"
             app:argType="string" />
@@ -92,11 +100,13 @@
     <fragment
         android:id="@+id/createAdminFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.createadmin.CreateAdminFragment"
-        android:label="CreateAdminFragment" />
+        android:label="CreateAdminFragment"
+        tools:layout="@layout/fragment_create_admin"/>
     <fragment
         android:id="@+id/takeBackFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.requestmanager.takeback.TakeBackFragment"
-        android:label="TakeBackFragment">
+        android:label="TakeBackFragment"
+        tools:layout="@layout/fragment_take_back">
         <argument
             android:name="rentalRequestID"
             app:argType="string" />
@@ -110,7 +120,8 @@
     <fragment
         android:id="@+id/calendarFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.calendar.CalendarFragment"
-        android:label="CalendarFragment">
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar">
         <argument
             android:name="deviceID"
             app:argType="string" />
@@ -122,7 +133,8 @@
         android:id="@+id/rentalRequestFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.request.RentalRequestFragment"
         android:label="RentalRequestFragment"
-        app:popUpTo="@id/deviceDetailsFragment">
+        app:popUpTo="@id/deviceDetailsFragment"
+        tools:layout="@layout/fragment_rental_request">
         <argument
             android:name="deviceID"
             app:argType="string" />
@@ -139,11 +151,13 @@
     <dialog
         android:id="@+id/addDeviceDialogfragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.adddevice.AddDeviceDialogFragment"
-        android:label="AddDeviceDialogfragment" />
+        android:label="AddDeviceDialogfragment"
+        tools:layout="@layout/dialog_add_new_device"/>
     <dialog
         android:id="@+id/editDeviceFragment"
         android:name="hu.bme.aut.android.devicemanager.ui.devicemanager.editdevice.EditDeviceFragment"
-        android:label="EditDeviceFragment">
+        android:label="EditDeviceFragment"
+        tools:layout="@layout/dialog_edit_device_name">
         <argument
             android:name="deviceID"
             app:argType="string" />
