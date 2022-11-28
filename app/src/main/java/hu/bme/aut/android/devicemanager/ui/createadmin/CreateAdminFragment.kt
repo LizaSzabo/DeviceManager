@@ -50,7 +50,7 @@ class CreateAdminFragment : RainbowCakeFragment<CreateAdminViewState, CreateAdmi
             is AdminCreationSuccess -> {
                 binding.loading.isVisible = false
                 val successMessage =
-                   getString(R.string.admin_success_creation_message_text) ?: ""
+                   getString(R.string.admin_success_creation_message_text)
                 val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
                 showSnackBar(binding.root, successColor, successMessage)
                 findNavController().popBackStack()
