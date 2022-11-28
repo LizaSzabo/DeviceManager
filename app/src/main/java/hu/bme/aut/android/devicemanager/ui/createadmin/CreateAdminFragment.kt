@@ -50,7 +50,7 @@ class CreateAdminFragment : RainbowCakeFragment<CreateAdminViewState, CreateAdmi
             is AdminCreationSuccess -> {
                 binding.loading.isVisible = false
                 val successMessage =
-                   getString(R.string.admin_success_creation_message_text)
+                    getString(R.string.admin_success_creation_message_text)
                 val successColor = activity?.getColor(R.color.success_color) ?: Color.GREEN
                 showSnackBar(binding.root, successColor, successMessage)
                 findNavController().popBackStack()
@@ -92,7 +92,7 @@ class CreateAdminFragment : RainbowCakeFragment<CreateAdminViewState, CreateAdmi
             binding.passwordRepeatInput.error = "Password cannot be empty!"
             error = true
         }
-        if (binding.passwordRepeatInput.text != binding.passwordInput.text) {
+        if (binding.passwordRepeatInput.text.toString() != binding.passwordInput.text.toString()) {
             binding.passwordRepeatInput.error = "Passwords are not identical"
             error = true
         }
